@@ -58,30 +58,3 @@ export async function loadLocaleMessages(/*i18n: I18n, */ locale: Locale) {
 
   return nextTick();
 }
-
-////////////////////////////////////////////////////////
-// function setI18nLanguage(lang) {
-//   i18n.locale = lang;
-//   //axios.defaults.headers.common['Accept-Language'] = lang;
-//   document.querySelector('html').setAttribute('lang', lang);
-//   return lang;
-// }
-
-// export function loadLanguageAsync(lang) {
-//   // If the same language
-//   if (i18n.locale === lang) {
-//     return Promise.resolve(setI18nLanguage(lang));
-//   }
-
-//   // If the language was already loaded
-//   if (loadedLanguages.includes(lang)) {
-//     return Promise.resolve(setI18nLanguage(lang));
-//   }
-
-//   // If the language hasn't been loaded yet
-//   return import(/* webpackChunkName: "lang-[request]" */ `@/locales/${lang}.json`).then((messages) => {
-//     i18n.setLocaleMessage(lang, messages.default);
-//     loadedLanguages.push(lang);
-//     return setI18nLanguage(lang);
-//   });
-// }

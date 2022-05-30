@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.app.json",
+  "files": ["src/locales/en.json", "src/locales/uk.json", "env.d.ts"],
+  "exclude": [],
+  "compilerOptions": {
+    "composite": true,
+    "lib": [],
+    "types": ["node", "jsdom", "vite-plugin-pwa/client", "vue-i18n/dist/vue-i18n"]
+  }
+}

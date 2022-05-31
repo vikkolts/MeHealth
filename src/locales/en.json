@@ -5,7 +5,9 @@
     "Settings": "Settings"
   },
   "Actions": {
-    "Close": "Close"
+    "Close": "Close",
+    "Cancel": "Cancel",
+    "Add": "Add"
   },
   "DailyReminder": "Daily reminder",
   "AddTodaysMood": "Add today’s mood",
@@ -23,5 +25,10 @@
     "BelowAverage": "Below average",
     "Bad": "Bad",
     "Terrible": "Terrible"
-  }
+  },
+  "HowAreYou": "How are you?",
+  "Date": "Date",
+  "SelectMood": "Select mood",
+  "AdditionalInformation": "Additional information",
+  "Notes": "Notes"
 }

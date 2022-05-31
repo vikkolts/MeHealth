@@ -5,7 +5,9 @@
     "Settings": "Налаштування"
   },
   "Actions": {
-    "Close": "Закрити"
+    "Close": "Закрити",
+    "Cancel": "Скасувати",
+    "Add": "Додати"
   },
   "DailyReminder": "Щоденне нагадування",
   "AddTodaysMood": "Додай настрій сьогодні",
@@ -23,5 +25,10 @@
     "BelowAverage": "Нижче середнього",
     "Bad": "Погано",
     "Terrible": "Жахливо"
-  }
+  },
+  "HowAreYou": "Як ти?",
+  "Date": "Дата",
+  "SelectMood": "Вибери настрій",
+  "AdditionalInformation": "Додаткова інформація",
+  "Notes": "Нотатки"
 }

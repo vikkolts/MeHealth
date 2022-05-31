@@ -1,3 +1,7 @@
 {
-  "hello": "Hi"
+  "Pages": {
+    "Summary": "Summary",
+    "Calendar": "Calendar",
+    "Settings": "Settings"
+  }
 }

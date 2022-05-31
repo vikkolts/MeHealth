@@ -9,6 +9,7 @@ import {
   setI18nLanguage,
   loadLocaleMessages,
 } from './i18n'
+import TheHeader from './components/TheHeader.vue'
 
 const { locale, availableLocales, } = useI18n()
 const currentLocale = ref(locale.value)
@@ -24,23 +25,15 @@ watch(currentLocale, async (val) => {
 })
 </script>
 <template>
-  <header>
-
-    <form class="language">
-      <label for="locale-select">Language</label>
-      <select id="locale-select"
-        v-model="currentLocale">
-        <option v-for="optionLocale in SUPPORT_LOCALES"
-          :key="optionLocale"
-          :value="optionLocale">
-          {{ optionLocale }}
-        </option>
-      </select>
-    </form>
-  </header>
-
+  <TheHeader />
   <main>
-    <RouterView />
+    <router-view v-slot="{ Component, route }">
+      <!-- Use any custom transition and fallback to `fade` -->
+      <transition :name="route.meta.transition as string || 'fade'">
+        <component :is="Component"
+          :key="route.path" />
+      </transition>
+    </router-view>
   </main>
   <ReloadPrompt />
 </template>

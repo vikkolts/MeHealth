@@ -3,5 +3,25 @@
     "Summary": "Підсумок",
     "Calendar": "Календар",
     "Settings": "Налаштування"
+  },
+  "Actions": {
+    "Close": "Закрити"
+  },
+  "DailyReminder": "Щоденне нагадування",
+  "AddTodaysMood": "Додай настрій сьогодні",
+  "GoodMorning": "Доброго ранку",
+  "GoodAfternoon": "Добрий день",
+  "GoodEvening": "Добрий вечір",
+  "GoodNight": "Доброї ночі",
+  "WeekStats": "Статистика тижня",
+  "MonthStats": "Статистика місяця",
+  "YearStats": "Статистика року",
+  "Stats": {
+    "Great": "Чудово",
+    "Good": "Добре",
+    "Average": "Середньо",
+    "BelowAverage": "Нижче середнього",
+    "Bad": "Погано",
+    "Terrible": "Жахливо"
   }
 }

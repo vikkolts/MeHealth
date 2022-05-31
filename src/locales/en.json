@@ -3,5 +3,25 @@
     "Summary": "Summary",
     "Calendar": "Calendar",
     "Settings": "Settings"
+  },
+  "Actions": {
+    "Close": "Close"
+  },
+  "DailyReminder": "Daily reminder",
+  "AddTodaysMood": "Add today’s mood",
+  "GoodMorning": "Good morning",
+  "GoodAfternoon": "Good afternoon",
+  "GoodEvening": "GoodEvening",
+  "GoodNight": "Good night",
+  "WeekStats": "Week stats",
+  "MonthStats": "Month stats",
+  "YearStats": "Year stats",
+  "Stats": {
+    "Great": "Great",
+    "Good": "Good",
+    "Average": "Average",
+    "BelowAverage": "Below average",
+    "Bad": "Bad",
+    "Terrible": "Terrible"
   }
 }

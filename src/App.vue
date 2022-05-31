@@ -26,15 +26,15 @@ watch(currentLocale, async (val) => {
 </script>
 <template>
   <TheHeader />
-  <main>
-    <router-view v-slot="{ Component, route }">
-      <!-- Use any custom transition and fallback to `fade` -->
-      <transition :name="route.meta.transition as string || 'fade'">
-        <component :is="Component"
-          :key="route.path" />
-      </transition>
-    </router-view>
-  </main>
+  <router-view v-slot="{ Component, route }">
+    <!-- Use any custom transition and fallback to `fade` -->
+    <!-- <transition :name="route.meta.transition as string || 'fade'">
+      <component :is="Component"
+        :key="route.path" />
+    </transition> -->
+    <component :is="Component"
+      :key="route.path" />
+  </router-view>
   <ReloadPrompt />
 </template>
 

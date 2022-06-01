@@ -33,16 +33,13 @@ function checkTimePeriod() {
 };
 checkTimePeriod();
 
-function openAddModal(event: Event) {
-  isOpenAddModal.value = true
-}
 </script>
 
 <template>
   <main>
     <PageHeader :title="$t(title)"
       :with-add-button="true"
-      @button-click="openAddModal" />
+      @button-click="isOpenAddModal = true" />
     <div class="flex flex-col w-full gap-[6px]">
       <ClosableCard />
       <StatsCard :title="$t('WeekStats')" />

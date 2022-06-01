@@ -13,11 +13,9 @@ const emit = defineEmits<{
 }>()
 
 const isOpenAddModal = computed({
-  // getter
   get() {
     return props.modelValue;
   },
-  // setter
   set(newValue: boolean) {
     emit('update:modelValue', newValue);
   }
@@ -41,8 +39,19 @@ watch(isOpenAddModal, (newValue) => {
     clearModalData();
 })
 
-function addMood() {
-  if (!(modal.date && modal.mood && modal.notes)) return;
+async function addMood() {
+  if (!(modal.date && modal.mood)) return;
+  const formData = {
+    date: modal.date,
+    mood_id: +modal.mood,
+    notes: modal.notes || undefined,
+  };
+  try {
+    await store.saveMoodRecord(formData);
+  } catch (e) {
+    console.log(e)
+  }
+  isOpenAddModal.value = false;
 }
 </script>
 
@@ -62,6 +71,7 @@ function addMood() {
           required>
       </div>
       <RadioGroup v-model="modal.mood"
+        aria-required="true"
         class="items-center mb-8">
         <RadioGroupLabel class="footnote block ml-2 mb-[6px] uppercase system-gray-color">{{ $t('SelectMood') }}</RadioGroupLabel>
         <div class="grid grid-flow-col justify-around rounded-lg cursor-pointer py-[2px] mood-radio-group"

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import IconAdd28 from "../components/icons/IconAdd28.vue";
 const props = defineProps<{
-  withAddButton?: Boolean,
-  title: String
+  withAddButton?: boolean,
+  title: string
 }>()
 const emit = defineEmits<{
   (e: 'buttonClick', event: Event): void

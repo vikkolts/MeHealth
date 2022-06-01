@@ -9,14 +9,14 @@ export type RootState = {
 export type DBMoodRecord = {
   id: number;
   date: Date;
-  mood_id: Number;
-  notes?: String;
+  mood_id: number;
+  notes?: string;
 };
 
 export type MoodRecord = {
-  date: String;
-  mood_id: Number;
-  notes?: String;
+  date: string;
+  mood_id: number;
+  notes?: string;
 };
 
 export const useMoodTypesStore = defineStore({
@@ -30,6 +30,7 @@ export const useMoodTypesStore = defineStore({
     async saveMoodRecord(formData: MoodRecord) {
       return await saveDBMoodRecord(formData);
     },
+
     async getMoodRecordsList() {
       this.moodRecords = [];
       let result: DBMoodRecord[] = await getDBMoodRecords();

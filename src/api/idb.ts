@@ -32,7 +32,7 @@ export async function getDb(): Promise<IDBDatabase> {
     };
   });
 }
-export async function deleteDBMoodRecord(moodRecordId: DBMoodRecord['id']): Promise<String> {
+export async function deleteDBMoodRecord(moodRecordId: DBMoodRecord['id']): Promise<string> {
   let db: IDBDatabase = await getDb();
 
   return new Promise((resolve, reject) => {
@@ -73,7 +73,7 @@ export async function getDBMoodRecords(): Promise<DBMoodRecord[]> {
   });
 }
 
-export async function saveDBMoodRecord(moodRecord: MoodRecord): Promise<String> {
+export async function saveDBMoodRecord(moodRecord: MoodRecord): Promise<string> {
   let db: IDBDatabase = await getDb();
 
   return new Promise((resolve, reject) => {

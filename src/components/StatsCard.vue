@@ -3,7 +3,7 @@ import IconChevronRight16Vue from './icons/IconChevronRight16.vue';
 import IconDocumentLandscape20Vue from './icons/IconDocumentLandscape20.vue';
 
 const props = defineProps<{
-  title: String
+  title: string
 }>()
 const emit = defineEmits<{
   (e: 'cardClick', event: Event): void

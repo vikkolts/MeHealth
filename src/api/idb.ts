@@ -1,4 +1,4 @@
-import type { DBMoodRecord, MoodRecord } from '@/stores/moodTypes';
+import type { DBMoodRecord } from '@/stores/moodTypes';
 
 const DB_NAME: string = 'me-health-db';
 const DB_VERSION: number = 1;
@@ -32,22 +32,23 @@ export async function getDb(): Promise<IDBDatabase> {
     };
   });
 }
-export async function deleteDBMoodRecord(moodRecordId: DBMoodRecord['id']): Promise<string> {
-  let db: IDBDatabase = await getDb();
 
+export async function clearIDB(): Promise<string> {
+  let db: IDBDatabase = await getDb();
   return new Promise((resolve, reject) => {
     let trans: IDBTransaction = db.transaction(['moodRecords'], 'readwrite');
     trans.oncomplete = (e: Event) => {
-      resolve('Deleted successfully');
+      resolve('Cleared successfully');
     };
     trans.onerror = (e: Event) => {
-      reject({ title: 'Error while deleting', message: (e.target as IDBRequest).error });
+      reject({ title: 'Error while cleaning', message: (e.target as IDBRequest).error });
     };
 
     let store: IDBObjectStore = trans.objectStore('moodRecords');
-    store.delete(moodRecordId);
+    store.clear();
   });
 }
+
 export async function getDBMoodRecords(): Promise<DBMoodRecord[]> {
   let db: IDBDatabase = await getDb();
 
@@ -73,7 +74,7 @@ export async function getDBMoodRecords(): Promise<DBMoodRecord[]> {
   });
 }
 
-export async function saveDBMoodRecord(moodRecord: MoodRecord): Promise<string> {
+export async function saveDBMoodRecord(moodRecord: DBMoodRecord): Promise<string> {
   let db: IDBDatabase = await getDb();
 
   return new Promise((resolve, reject) => {
@@ -87,5 +88,22 @@ export async function saveDBMoodRecord(moodRecord: MoodRecord): Promise<string> 
 
     let store: IDBObjectStore = trans.objectStore('moodRecords');
     store.put(moodRecord);
+  });
+}
+
+export async function deleteDBMoodRecord(moodRecordId: DBMoodRecord['id']): Promise<string> {
+  let db: IDBDatabase = await getDb();
+
+  return new Promise((resolve, reject) => {
+    let trans: IDBTransaction = db.transaction(['moodRecords'], 'readwrite');
+    trans.oncomplete = (e: Event) => {
+      resolve('Deleted successfully');
+    };
+    trans.onerror = (e: Event) => {
+      reject({ title: 'Error while deleting', message: (e.target as IDBRequest).error });
+    };
+
+    let store: IDBObjectStore = trans.objectStore('moodRecords');
+    store.delete(moodRecordId!);
   });
 }

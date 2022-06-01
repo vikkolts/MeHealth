@@ -18,12 +18,17 @@ onMounted(async () => {
     <PageHeader :title="$t('Pages.Calendar')"
       :with-add-button="true"
       @button-click="isOpenAddModal = true" />
-    <AddMoodModal v-model="isOpenAddModal" />
+    <AddMoodModal v-model="isOpenAddModal"
+      @record-created="store.getMoodRecordsList()" />
     <div>
-      <p v-for="(m, index) in moodRecords"
-        :key="index">
+      <div v-for="m in moodRecords"
+        :key="m.id">
         {{ m }}
-      </p>
+        <!-- <button class="p-1 m-1 inline-block bg-gray-700"
+          @click="[store.saveMoodRecord({ id: m.id, date: m.date, mood_id: 5 }), store.getMoodRecordsList()]">Edit</button> -->
+        <button class="p-1 m-1 inline-block bg-red-600"
+          @click="store.deleteMoodRecord(m.id)">Delete</button>
+      </div>
     </div>
   </main>
 </template>

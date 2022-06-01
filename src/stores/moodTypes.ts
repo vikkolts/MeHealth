@@ -1,4 +1,4 @@
-import { deleteDBMoodRecord, getDBMoodRecords, saveDBMoodRecord } from '@/api/idb';
+import { clearIDB, deleteDBMoodRecord, getDBMoodRecords, saveDBMoodRecord } from '@/api/idb';
 import { defineStore } from 'pinia';
 
 export type RootState = {
@@ -7,13 +7,7 @@ export type RootState = {
 };
 
 export type DBMoodRecord = {
-  id: number;
-  date: Date;
-  mood_id: number;
-  notes?: string;
-};
-
-export type MoodRecord = {
+  id?: number;
   date: string;
   mood_id: number;
   notes?: string;
@@ -27,18 +21,21 @@ export const useMoodTypesStore = defineStore({
   }),
   getters: {},
   actions: {
-    async saveMoodRecord(formData: MoodRecord) {
+    async saveMoodRecord(formData: DBMoodRecord) {
       return await saveDBMoodRecord(formData);
     },
 
     async getMoodRecordsList() {
       this.moodRecords = [];
-      let result: DBMoodRecord[] = await getDBMoodRecords();
-      this.moodRecords.push(...result);
+      this.moodRecords = (await getDBMoodRecords()) || [];
     },
 
     async deleteMoodRecord(id: DBMoodRecord['id']) {
       return await deleteDBMoodRecord(id);
+    },
+
+    async cleanDataBase() {
+      return await clearIDB();
     },
   },
 });

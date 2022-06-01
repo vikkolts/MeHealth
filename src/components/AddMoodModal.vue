@@ -9,7 +9,8 @@ const props = defineProps<{
   modelValue: boolean,
 }>()
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: boolean): void
+  (e: 'update:modelValue', value: boolean): void,
+  (e: 'recordCreated'): void,
 }>()
 
 const isOpenAddModal = computed({
@@ -40,7 +41,7 @@ watch(isOpenAddModal, (newValue) => {
 })
 
 async function addMood() {
-  if (!(modal.date && modal.mood)) return;
+  if (!(modal.date && modal.mood !== '')) return;
   const formData = {
     date: modal.date,
     mood_id: +modal.mood,
@@ -52,6 +53,7 @@ async function addMood() {
     console.log(e)
   }
   isOpenAddModal.value = false;
+  emit("recordCreated");
 }
 </script>
 
@@ -59,7 +61,7 @@ async function addMood() {
   <TheModal v-model="isOpenAddModal"
     :title="$t('HowAreYou')"
     @submit-clicked="addMood">
-    <form>
+    <form @submit.prevent="addMood">
       <div class="bg-white px-4 py-[5px] flex justify-between items-center rounded-[10px] mb-8">
         <label class="body-text"
           for="modal-date-picker">{{ $t('Date') }}</label>

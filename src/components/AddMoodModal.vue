@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import TheModal from "../components/TheModal.vue";
-import { computed, reactive, watch } from "vue";
+import { computed, onMounted, reactive, watch } from "vue";
 import { RadioGroup, RadioGroupOption, RadioGroupLabel } from "@headlessui/vue";
 import { useMoodTypesStore } from "@/stores/moodTypes";
 import { storeToRefs } from 'pinia'
@@ -28,6 +28,8 @@ const modal = reactive({
   date: '',
   notes: '',
 });
+
+onMounted(() => store.getMoodsList())
 
 function clearModalData() {
   modal.date = '';
@@ -78,12 +80,12 @@ async function addMood() {
         <RadioGroupLabel class="footnote block ml-2 mb-[6px] uppercase system-gray-color">{{ $t('SelectMood') }}</RadioGroupLabel>
         <div class="grid grid-cols-6 rounded-lg cursor-pointer py-[2px] mood-radio-group"
           style="background-color: rgba(118, 118, 128, 0.12);">
-          <RadioGroupOption v-for="(m, index) in moodTypes"
-            :key="index"
+          <RadioGroupOption v-for="m in moodTypes"
+            :key="m.id"
             v-slot="{ checked }"
-            :value="index"
+            :value="m.id"
             class="body-text relative">
-            <div :class="[checked ? 'radio-checked' : '', 'text-center w-full px-4 py-[6px] align-middle items-center']">{{ m }}</div>
+            <div :class="[checked ? 'radio-checked' : '', 'text-center w-full px-4 py-[6px] align-middle items-center']">{{ m.emoji }}</div>
           </RadioGroupOption>
         </div>
       </RadioGroup>

@@ -1,7 +1,7 @@
-import type { DBMoodRecord } from '@/stores/moodTypes';
+import type { DBMood, DBMoodRecord } from '@/stores/moodTypes';
 
 const DB_NAME: string = 'me-health-db';
-const DB_VERSION: number = 1;
+const DB_VERSION: number = 3;
 let DB: IDBDatabase;
 
 export async function getDb(): Promise<IDBDatabase> {
@@ -25,10 +25,22 @@ export async function getDb(): Promise<IDBDatabase> {
     request.onupgradeneeded = (e: IDBVersionChangeEvent) => {
       console.log('onupgradeneeded');
       let db: IDBDatabase = (e.target as IDBOpenDBRequest).result;
-      let objectStore: IDBObjectStore = db.createObjectStore('moodRecords', { autoIncrement: true, keyPath: 'id' });
-      objectStore.createIndex('date', 'date', { unique: true });
-      objectStore.createIndex('mood_id', 'mood_id', { unique: false });
-      objectStore.createIndex('notes', 'notes', { unique: false });
+      if (!db.objectStoreNames.contains('moodRecords')) {
+        let objectRecordsStore: IDBObjectStore = db.createObjectStore('moodRecords', { autoIncrement: true, keyPath: 'id' });
+        objectRecordsStore.createIndex('date', 'date', { unique: true });
+        objectRecordsStore.createIndex('mood_id', 'mood_id', { unique: false });
+        objectRecordsStore.createIndex('notes', 'notes', { unique: false });
+      }
+      if (!db.objectStoreNames.contains('moods')) {
+        let objectMoodsStore: IDBObjectStore = db.createObjectStore('moods', { keyPath: 'id' });
+        objectMoodsStore.createIndex('emoji', 'emoji', { unique: true });
+        objectMoodsStore.add({ id: 0, emoji: '😡' });
+        objectMoodsStore.add({ id: 1, emoji: '😭' });
+        objectMoodsStore.add({ id: 2, emoji: '🙁' });
+        objectMoodsStore.add({ id: 3, emoji: '😐' });
+        objectMoodsStore.add({ id: 4, emoji: '🙂' });
+        objectMoodsStore.add({ id: 5, emoji: '😁' });
+      }
     };
   });
 }
@@ -49,6 +61,7 @@ export async function clearIDB(): Promise<string> {
   });
 }
 
+// RECORDS
 export async function getDBMoodRecords(date_from?: string, date_to?: string): Promise<DBMoodRecord[]> {
   let db: IDBDatabase = await getDb();
 
@@ -67,7 +80,6 @@ export async function getDBMoodRecords(date_from?: string, date_to?: string): Pr
     store.openCursor().onsuccess = (e: Event) => {
       let cursor = (e.target as IDBRequest).result as IDBCursorWithValue;
       if (cursor) {
-        console.log(cursor);
         // date filter logic below
         if (date_from && date_to) {
           if (new Date(date_from).getTime() <= new Date(cursor.value.date).getTime() && new Date(cursor.value.date).getTime() <= new Date(date_to).getTime())
@@ -114,5 +126,31 @@ export async function deleteDBMoodRecord(moodRecordId: DBMoodRecord['id']): Prom
 
     let store: IDBObjectStore = trans.objectStore('moodRecords');
     store.delete(moodRecordId!);
+  });
+}
+
+// MOODS
+export async function getDBMoodsList(): Promise<DBMood[]> {
+  let db: IDBDatabase = await getDb();
+
+  return new Promise((resolve, reject) => {
+    let trans: IDBTransaction = db.transaction(['moods'], 'readonly');
+    trans.oncomplete = (e: Event) => {
+      resolve(moods);
+    };
+    trans.onerror = (e: Event) => {
+      reject({ title: 'Error while fetching', message: (e.target as IDBRequest).error });
+    };
+
+    let store: IDBObjectStore = trans.objectStore('moods');
+    let moods: DBMood[] = [];
+
+    store.openCursor().onsuccess = (e: Event) => {
+      let cursor = (e.target as IDBRequest).result as IDBCursorWithValue;
+      if (cursor) {
+        moods.push(cursor.value);
+        cursor.continue();
+      }
+    };
   });
 }

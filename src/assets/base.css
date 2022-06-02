@@ -120,6 +120,8 @@ main {
   padding-left: calc(16px + env(safe-area-inset-left));
   padding-right: calc(16px + env(safe-area-inset-right));
   padding-bottom: env(safe-area-inset-bottom);
+  max-width: 768px;
+  margin: 0 auto;
 }
 
 .closable-card {
@@ -150,11 +152,13 @@ main {
   box-shadow: 0px 0.5px 4px rgba(0, 0, 0, 0.12), 0px 6px 13px rgba(0, 0, 0, 0.12);
 }
 
-.mood-radio-group > div:not(:last-child)::after{
+.mood-radio-group > div:not(:last-child):not([aria-checked=true])::after{
   content: '|';
-  right: 0;
-  transform: translateY(11%);
+  position: absolute;
+  right: -2px;
+  top: 4px;
   color: var(--system-gray-3);
+  text-align: center;
 }
 
 .radio-checked{

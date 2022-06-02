@@ -76,14 +76,14 @@ async function addMood() {
         aria-required="true"
         class="items-center mb-8">
         <RadioGroupLabel class="footnote block ml-2 mb-[6px] uppercase system-gray-color">{{ $t('SelectMood') }}</RadioGroupLabel>
-        <div class="grid grid-flow-col justify-around rounded-lg cursor-pointer py-[2px] mood-radio-group"
+        <div class="grid grid-cols-6 rounded-lg cursor-pointer py-[2px] mood-radio-group"
           style="background-color: rgba(118, 118, 128, 0.12);">
           <RadioGroupOption v-for="(m, index) in moodTypes"
             :key="index"
             v-slot="{ checked }"
             :value="index"
             class="body-text relative">
-            <span :class="[checked ? 'radio-checked' : '', 'px-4 py-[6px]']">{{ m }}</span>
+            <div :class="[checked ? 'radio-checked' : '', 'text-center w-full px-4 py-[6px] align-middle items-center']">{{ m }}</div>
           </RadioGroupOption>
         </div>
       </RadioGroup>

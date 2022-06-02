@@ -8,7 +8,7 @@ import IconSettings28 from "./icons/IconSettings28.vue";
 
 <template>
   <header class="nav-header">
-    <nav class="h-[49px] grid grid-cols-3 align-middle text-center system-gray-color font-medium">
+    <nav class="h-[49px] max-w-3xl mx-auto grid grid-cols-3 align-middle text-center system-gray-color font-medium">
       <RouterLink to="/"
         class="w-full caption-2 justify-center items-center pt-[5px]"
         activeClass="system-blue-color">

@@ -49,13 +49,13 @@ export async function clearIDB(): Promise<string> {
   });
 }
 
-export async function getDBMoodRecords(): Promise<DBMoodRecord[]> {
+export async function getDBMoodRecords(date_from?: string, date_to?: string): Promise<DBMoodRecord[]> {
   let db: IDBDatabase = await getDb();
 
   return new Promise((resolve, reject) => {
     let trans: IDBTransaction = db.transaction(['moodRecords'], 'readonly');
     trans.oncomplete = (e: Event) => {
-      resolve(moodRecords);
+      resolve(moodRecords.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())); //sort by date
     };
     trans.onerror = (e: Event) => {
       reject({ title: 'Error while fetching', message: (e.target as IDBRequest).error });
@@ -65,9 +65,18 @@ export async function getDBMoodRecords(): Promise<DBMoodRecord[]> {
     let moodRecords: DBMoodRecord[] = [];
 
     store.openCursor().onsuccess = (e: Event) => {
-      let cursor = (e.target as IDBRequest).result;
+      let cursor = (e.target as IDBRequest).result as IDBCursorWithValue;
       if (cursor) {
-        moodRecords.push(cursor.value);
+        console.log(cursor);
+        // date filter logic below
+        if (date_from && date_to) {
+          if (new Date(date_from).getTime() <= new Date(cursor.value.date).getTime() && new Date(cursor.value.date).getTime() <= new Date(date_to).getTime())
+            moodRecords.push(cursor.value);
+        } else if (date_from) {
+          if (date_from && new Date(date_from).getTime() <= new Date(cursor.value.date).getTime()) moodRecords.push(cursor.value);
+        } else if (date_to) {
+          if (date_to && new Date(cursor.value.date).getTime() <= new Date(date_to).getTime()) moodRecords.push(cursor.value);
+        } else moodRecords.push(cursor.value);
         cursor.continue();
       }
     };

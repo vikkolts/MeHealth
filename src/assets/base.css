@@ -52,6 +52,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  user-select: none;
 }
 
 /* TYPOGRAPHY */
@@ -144,7 +145,7 @@ main {
 .custom-meter div.thumb::after {
   content: ' ';
   position: absolute;
-  right: 0;
+  right: -4px;
   height: 16px;
   width: 8px;
   transform: translateY(-30%);

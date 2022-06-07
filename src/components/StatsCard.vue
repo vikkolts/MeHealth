@@ -3,7 +3,8 @@ import IconChevronRight16Vue from './icons/IconChevronRight16.vue';
 import IconDocumentLandscape20Vue from './icons/IconDocumentLandscape20.vue';
 
 const props = defineProps<{
-  title: string
+  title: string,
+  percent: number,
 }>()
 const emit = defineEmits<{
   (e: 'cardClick', event: Event): void
@@ -21,7 +22,7 @@ const emit = defineEmits<{
     </div>
     <div class="custom-meter my-1">
       <div class="thumb"
-        style="width: 50%;"></div>
+        :style="{ width: props.percent + '%' }"></div>
     </div>
     <p class="title-3 font-bold font-rounded">{{ $t('Stats.Good') }}</p>
   </div>

@@ -2,7 +2,7 @@
 import PageHeader from "../components/PageHeader.vue"
 import ClosableCard from "../components/ClosableCard.vue"
 import { add, formatISO } from 'date-fns'
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import StatsCard from "@/components/StatsCard.vue";
 import AddMoodModal from "../components/AddMoodModal.vue";
 import { useMoodTypesStore, type DBMoodRecord } from "@/stores/moodTypes";
@@ -18,6 +18,9 @@ const store = useMoodTypesStore()
 const { moodRecords, moodTypes } = storeToRefs(store);
 onMounted(async () => {
   await store.getMoodRecordsList();
+})
+
+watch(moodRecords, () => {
   setStatsInfo();
 })
 
@@ -68,12 +71,16 @@ checkTimePeriod();
     <div class="flex flex-col w-full gap-[6px]">
       <ClosableCard />
       <StatsCard :title="$t('WeekStats')"
-        :percent="weekStatsPercent" />
+        :percent="weekStatsPercent"
+        @click="$router.push({ name: 'stats', params: { type: 'week' } })" />
       <StatsCard :title="$t('MonthStats')"
-        :percent="monthStatsPercent" />
+        :percent="monthStatsPercent"
+        @click="$router.push({ name: 'stats', params: { type: 'month' } })" />
       <StatsCard :title="$t('YearStats')"
-        :percent="yearStatsPercent" />
+        :percent="yearStatsPercent"
+        @click="$router.push({ name: 'stats', params: { type: 'year' } })" />
     </div>
-    <AddMoodModal v-model="isOpenAddModal" />
+    <AddMoodModal v-model="isOpenAddModal"
+      @record-created="store.getMoodRecordsList()" />
   </main>
 </template>

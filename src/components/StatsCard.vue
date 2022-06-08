@@ -6,15 +6,11 @@ const props = defineProps<{
   title: string,
   percent: number,
 }>()
-const emit = defineEmits<{
-  (e: 'cardClick', event: Event): void
-}>()
 
 </script>
 
 <template>
-  <div class="closable-card cursor-pointer rounded-[10px] px-4 py-[12px] flex flex-col gap-4"
-    @click="emit('cardClick', $event)">
+  <div class="closable-card cursor-pointer rounded-[10px] px-4 py-[12px] flex flex-col gap-4">
     <div class="flex gap-1 w-full system-indigo-color items-center">
       <IconDocumentLandscape20Vue />
       <p class="subheadline font-semibold flex mr-auto">{{ props.title }}</p>

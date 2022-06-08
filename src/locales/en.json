@@ -26,6 +26,9 @@
     "Bad": "Bad",
     "Terrible": "Terrible"
   },
+  "Week": "Week",
+  "Month": "Month",
+  "Year": "Year",
   "HowAreYou": "How are you?",
   "Date": "Date",
   "SelectMood": "Select mood",

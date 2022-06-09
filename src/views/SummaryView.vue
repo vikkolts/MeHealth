@@ -25,21 +25,9 @@ watch(moodRecords, () => {
 })
 
 function setStatsInfo() {
-  const today = new Date();
-  const weekArray: DBMoodRecord[] = [];
-  const monthArray: DBMoodRecord[] = [];
-  const yearArray: DBMoodRecord[] = [];
-  const minWeekDate = add(today, { days: -7 });
-  const minMonthDate = add(today, { months: -1 });
-  const minYearDate = add(today, { years: -1 });
-  moodRecords.value.forEach(r => {
-    if (new Date(r.date) >= minWeekDate && new Date(r.date) <= today) weekArray.push(r);
-    if (new Date(r.date) >= minMonthDate && new Date(r.date) <= today) monthArray.push(r);
-    if (new Date(r.date) >= minYearDate && new Date(r.date) <= today) yearArray.push(r);
-  })
-  weekStatsPercent.value = (weekArray.reduce((acc, cur) => acc + cur.mood_id, 0) / weekArray.length) * 100 / moodTypes.value.length;
-  monthStatsPercent.value = (monthArray.reduce((acc, cur) => acc + cur.mood_id, 0) / monthArray.length) * 100 / moodTypes.value.length;
-  yearStatsPercent.value = (yearArray.reduce((acc, cur) => acc + cur.mood_id, 0) / yearArray.length) * 100 / moodTypes.value.length;
+  weekStatsPercent.value = (store.moodRecordListByPeriods.week.reduce((acc, cur) => acc + cur.mood_id, 0) / store.moodRecordListByPeriods.week.length) * 100 / moodTypes.value.length;
+  monthStatsPercent.value = (store.moodRecordListByPeriods.month.reduce((acc, cur) => acc + cur.mood_id, 0) / store.moodRecordListByPeriods.month.length) * 100 / moodTypes.value.length;
+  yearStatsPercent.value = (store.moodRecordListByPeriods.year.reduce((acc, cur) => acc + cur.mood_id, 0) / store.moodRecordListByPeriods.year.length) * 100 / moodTypes.value.length;
 }
 
 function checkTimePeriod() {

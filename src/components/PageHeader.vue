@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import IconAdd28 from "../components/icons/IconAdd28.vue";
+import IconChevronBack24Vue from "./icons/IconChevronBack24.vue";
 const props = defineProps<{
   withAddButton?: boolean,
+  withBackButton?: boolean,
   title: string
 }>()
 const emit = defineEmits<{
@@ -12,9 +14,15 @@ const emit = defineEmits<{
 
 <template>
   <div class="grid gap-1 grid-rows-2">
-    <div class="text-right py-2 h-[50px]">
-      <button v-if="props.withAddButton"
+    <div class="flex py-2 h-[50px]">
+      <button v-if="props.withBackButton"
         class="primary"
+        type="button"
+        @click="$router.go(-1)">
+        <IconChevronBack24Vue />
+      </button>
+      <button v-if="props.withAddButton"
+        class="primary ml-auto"
         type="button"
         @click="emit('buttonClick', $event)">
         <IconAdd28 />

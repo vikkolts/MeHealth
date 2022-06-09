@@ -78,7 +78,7 @@ async function addMood() {
         aria-required="true"
         class="items-center mb-8">
         <RadioGroupLabel class="footnote block ml-2 mb-[6px] uppercase system-gray-color">{{ $t('SelectMood') }}</RadioGroupLabel>
-        <div class="grid grid-cols-6 rounded-lg cursor-pointer py-[2px] mood-radio-group"
+        <div class="grid grid-cols-6 rounded-lg cursor-pointer p-[2px] mood-radio-group"
           style="background-color: rgba(118, 118, 128, 0.12);">
           <RadioGroupOption v-for="m in moodTypes"
             :key="m.id"

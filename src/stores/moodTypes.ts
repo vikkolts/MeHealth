@@ -1,4 +1,5 @@
 import { clearIDB, deleteDBMoodRecord, getDBMoodRecords, getDBMoodsList, saveDBMoodRecord } from '@/api/idb';
+import { add } from 'date-fns';
 import { defineStore } from 'pinia';
 
 export type RootState = {
@@ -24,7 +25,27 @@ export const useMoodTypesStore = defineStore({
     moodTypes: [],
     moodRecords: [],
   }),
-  getters: {},
+  getters: {
+    moodRecordListByPeriods: (state): { week: DBMoodRecord[]; month: DBMoodRecord[]; year: DBMoodRecord[] } => {
+      const today = new Date();
+      const weekArray: DBMoodRecord[] = [];
+      const monthArray: DBMoodRecord[] = [];
+      const yearArray: DBMoodRecord[] = [];
+      const minWeekDate = add(today, { days: -7 });
+      const minMonthDate = add(today, { months: -1 });
+      const minYearDate = add(today, { years: -1 });
+      state.moodRecords.forEach((r) => {
+        if (new Date(r.date) >= minWeekDate && new Date(r.date) <= today) weekArray.push(r);
+        if (new Date(r.date) >= minMonthDate && new Date(r.date) <= today) monthArray.push(r);
+        if (new Date(r.date) >= minYearDate && new Date(r.date) <= today) yearArray.push(r);
+      });
+      return {
+        week: weekArray,
+        month: monthArray,
+        year: yearArray,
+      };
+    },
+  },
   actions: {
     async saveMoodRecord(formData: DBMoodRecord) {
       return await saveDBMoodRecord(formData);

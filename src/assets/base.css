@@ -1,17 +1,18 @@
 /* COLORS */
-:root{
-  --system-red: #FE3D2F;
-  --system-indigo: #5856D6;
-  --system-blue: #007AFF;
+:root {
+  --system-red: #fe3d2f;
+  --system-indigo: #5856d6;
+  --system-blue: #007aff;
 
   --color-text: #000000;
-  --color-background: #F2F1F6;
+  --color-background: #f2f1f6;
   --card-color-background: white;
   --navbar-color-background: hsla(0 0% 98% / 94%);
   --tab-group-color-background: hsla(240 4% 48% / 12%);
-  --system-gray-5: #E5E5EA;
-  --system-gray-3: #C7C7CC;
-  --system-gray: #8E8E93;
+  --system-gray-6: #f2f2f7;
+  --system-gray-5: #e5e5ea;
+  --system-gray-3: #c7c7cc;
+  --system-gray: #8e8e93;
 }
 
 /* TODO: DARK THEME */
@@ -21,27 +22,39 @@
   }
 } */
 
-.system-gray-color{
+.system-gray-color {
   color: var(--system-gray);
 }
 
-.system-gray-3-color{
+.system-gray-3-color {
   color: var(--system-gray-3);
 }
 
-.system-gray-5-color{
+.system-gray-5-color {
   color: var(--system-gray-5);
 }
 
-.system-blue-color{
+.system-blue-color {
   color: var(--system-blue);
 }
 
-.system-indigo-color{
+.system-indigo-color {
   color: var(--system-indigo);
 }
 
-.system-color-background{
+.system-gray-bg {
+  background-color: var(--system-gray);
+}
+
+.system-gray-3-bg {
+  background-color: var(--system-gray-3);
+}
+
+.system-gray-6-bg {
+  background-color: var(--system-gray-6);
+}
+
+.system-color-background {
   background-color: var(--color-background);
 }
 
@@ -54,13 +67,17 @@ body {
   color: var(--color-text);
   background: var(--color-background);
   transition: color 0.25s, background-color 0.25s;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-    Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   font-size: 16px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   user-select: none;
+}
+
+pre {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  white-space: pre-line;
 }
 
 /* TYPOGRAPHY */
@@ -116,27 +133,36 @@ header.nav-header {
   height: calc(49px + env(safe-area-inset-bottom));
 }
 
-.nav-header-bg{
+.nav-header-bg {
   background-color: var(--navbar-color-background);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow: 0px -0.5px 0px rgba(0, 0, 0, 0.3);
 }
 
+button:disabled {
+  opacity: 0.65;
+  filter: grayscale(1);
+}
+
 button.primary {
-  color: var(--system-blue)
+  color: var(--system-blue);
+}
+
+.danger {
+  color: var(--system-red);
 }
 
 main {
   padding-top: env(safe-area-inset-top);
   padding-left: calc(16px + env(safe-area-inset-left));
   padding-right: calc(16px + env(safe-area-inset-right));
-  padding-bottom: calc(49px + env(safe-area-inset-bottom));
+  padding-bottom: calc(49px + 16px + env(safe-area-inset-bottom));
   max-width: 768px;
   margin: 0 auto;
 }
 
-.closable-card {
+.system-white-bg {
   background-color: var(--card-color-background);
 }
 
@@ -144,8 +170,7 @@ main {
   width: 100%;
   height: 6px;
   border-radius: 10px;
-  background: linear-gradient(270deg, #34C759 0%, #FFCC00 50.52%, #FF3B30 100%);
-
+  background: linear-gradient(270deg, #34c759 0%, #ffcc00 50.52%, #ff3b30 100%);
 }
 
 .custom-meter div.thumb {
@@ -164,7 +189,7 @@ main {
   box-shadow: 0px 0.5px 4px rgba(0, 0, 0, 0.12), 0px 6px 13px rgba(0, 0, 0, 0.12);
 }
 
-.mood-radio-group > :not(:last-child):not([aria-checked=true])::after{
+.mood-radio-group > :not(:last-child):not([aria-checked='true'])::after {
   content: '|';
   font-weight: 200;
   font-size: 16px;
@@ -177,13 +202,13 @@ main {
   text-align: center;
 }
 
-.radio-checked{
+.radio-checked {
   background-color: white;
   border-radius: 6.93px;
   box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.12), 0px 3px 1px rgba(0, 0, 0, 0.04);
   z-index: 10;
 }
 
-.radio-checked::after{
+.radio-checked::after {
   content: none !important;
 }

@@ -16,7 +16,7 @@ function closeSelf() {
 
 <template>
   <div v-if="show"
-    class="closable-card cursor-pointer rounded-[10px] px-4 py-[12px] flex gap-4"
+    class="system-white-bg cursor-pointer rounded-[10px] px-4 py-[12px] flex gap-4"
     @click="emit('messageClick', $event)">
     <IconAlertBg48 />
     <div class="flex flex-col my-auto mr-auto">

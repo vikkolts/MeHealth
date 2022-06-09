@@ -17,7 +17,7 @@ const statsLabel = computed(() => {
 
 <template>
   <div v-if="props.percent"
-    class="closable-card cursor-pointer rounded-[10px] px-4 py-[12px] flex flex-col gap-4">
+    class="system-white-bg cursor-pointer rounded-[10px] px-4 py-[12px] flex flex-col gap-4">
     <div class="flex gap-1 w-full system-indigo-color items-center">
       <IconDocumentLandscape20Vue />
       <p class="subheadline font-semibold flex mr-auto">{{ props.title }}</p>

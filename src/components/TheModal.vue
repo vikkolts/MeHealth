@@ -11,6 +11,8 @@ import {
 const props = defineProps<{
   modelValue: boolean,
   title: string,
+  isEdit?: boolean,
+  formValid?: boolean
 }>()
 const emit = defineEmits<{
   (e: 'update:modelValue', value: boolean): void,
@@ -38,7 +40,7 @@ const setIsOpen = (value: boolean) => {
     as="template">
     <Dialog as="div"
       :open="isOpen"
-      class="relative z-10"
+      class="relative z-[1000]"
       @close="setIsOpen">
       <TransitionChild as="template"
         enter="duration-300 ease-out"
@@ -73,7 +75,8 @@ const setIsOpen = (value: boolean) => {
               <div class="w-1/4 text-right">
                 <button type="submit"
                   class="primary font-semibold"
-                  @click="emit('submitClicked')">{{ $t('Actions.Add') }}</button>
+                  :disabled="!props.formValid"
+                  @click="emit('submitClicked')">{{ props.isEdit ? $t('Edit') : $t('Actions.Add') }}</button>
               </div>
             </div>
 

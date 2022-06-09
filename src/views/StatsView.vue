@@ -60,7 +60,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <main class="px-0">
+  <main class="px-0 mb-96">
     <PageHeader :title="computedTitle"
       :with-add-button="true"
       :with-back-button="true"
@@ -70,11 +70,7 @@ onMounted(async () => {
       @record-created="store.getMoodRecordsList()" />
 
     <section v-if="statsLabel"
-      class="bg-white px-4 py-[11px]">
-      <label class="uppercase footnote system-gray-color font-semibold">{{ $t('InAverage') }}</label>
-      <h2 class="large-heading font-bold font-rounded">{{ $t(`Stats.${statsLabel}`) }}</h2>
-      <label class="subheadline system-gray-color font-semibold mb-2">{{ computedDateRange }}</label>
-
+      class="system-white-bg px-4 py-[11px]">
       <TabGroup :selectedIndex="selectedTab"
         @change="(index) => selectedTab = index">
         <TabList class="footnote flex rounded-lg cursor-pointer p-[2px] mood-radio-group"
@@ -84,13 +80,17 @@ onMounted(async () => {
             :key="stat.id"
             v-slot="{ selected }">
             <button :class="[
-              'w-full rounded-lg px-4 py-[6px] text-sm font-medium focus:outline-none relative',
+              'w-full rounded-lg px-4 py-[6px] footnote font-medium focus:outline-none relative',
               { 'radio-checked': selected }
             ]">
               {{ stat.title }}
             </button>
           </Tab>
         </TabList>
+
+        <label class="uppercase footnote system-gray-color font-semibold">{{ $t('InAverage') }}</label>
+        <h2 class="large-heading font-bold font-rounded">{{ $t(`Stats.${statsLabel}`) }}</h2>
+        <label class="subheadline system-gray-color font-semibold">{{ computedDateRange }}</label>
 
         <TabPanels class="mt-2 mb-6">
           <TabPanel v-for="(stat, idx) in statsTypes"

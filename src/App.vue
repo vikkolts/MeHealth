@@ -2,7 +2,7 @@
 import { RouterView } from 'vue-router'
 import './index.css'
 import ReloadPrompt from './components/ReloadPrompt.vue'
-import { watch, ref } from 'vue'
+// import { watch, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import {
   SUPPORT_LOCALES,
@@ -10,18 +10,15 @@ import {
   loadLocaleMessages,
 } from './i18n'
 import TheHeader from './components/TheHeader.vue'
+import { onMounted } from 'vue'
 
+// Temporary force uk lang on startup
 const { locale, availableLocales, } = useI18n()
-const currentLocale = ref(locale.value)
-
-/**
- * when the changes are detected, load the locale message and set the language
- */
-watch(currentLocale, async (val) => {
-  if (!availableLocales.includes(val)) {
-    await loadLocaleMessages(val);
+onMounted(async () => {
+  if (!availableLocales.includes('uk')) {
+    await loadLocaleMessages('uk');
   }
-  setI18nLanguage(val);
+  setI18nLanguage('uk');
 })
 </script>
 <template>

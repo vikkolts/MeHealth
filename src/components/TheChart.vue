@@ -16,7 +16,7 @@ const d: any = ref(null);
 const xScale: any = ref(null);
 const yScale: any = ref(null);
 const margin = {
-  top: 20,
+  top: 12,
   right: 35,
   bottom: 22,
   left: 4,

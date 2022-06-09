@@ -30,15 +30,5 @@ import IconSettings28 from "./icons/IconSettings28.vue";
         {{ $t('Pages.Settings') }}
       </RouterLink>
     </nav>
-
-    <!-- <label for="locale-select">Language</label>
-      <select id="locale-select"
-        v-model="currentLocale">
-        <option v-for="optionLocale in SUPPORT_LOCALES"
-          :key="optionLocale"
-          :value="optionLocale">
-          {{ optionLocale }}
-        </option>
-      </select> -->
   </header>
 </template>

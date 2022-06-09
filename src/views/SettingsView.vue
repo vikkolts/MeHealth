@@ -1,8 +1,27 @@
 <script setup lang="ts">
 import PageHeader from "../components/PageHeader.vue";
 import { useMoodTypesStore, type DBMoodRecord } from "@/stores/moodTypes";
+import { useI18n } from 'vue-i18n';
+import {
+  SUPPORT_LOCALES,
+  setI18nLanguage,
+  loadLocaleMessages,
+} from '@/i18n'
+import { ref, watch } from "vue";
+
+const { locale, availableLocales, } = useI18n()
+const currentLocale = ref(locale.value)
 
 const store = useMoodTypesStore()
+/**
+ * when the changes are detected, load the locale message and set the language
+ */
+watch(currentLocale, async (val) => {
+  if (!availableLocales.includes(val)) {
+    await loadLocaleMessages(val);
+  }
+  setI18nLanguage(val);
+})
 
 async function exportData() {
   const data = { ...await store.getMoodRecordsList() };
@@ -57,5 +76,15 @@ async function importData(event: Event) {
       <button type="submit"
         class="bg-green-600 m-2 p-2 text-white rounded-lg">IMPORT DATA</button>
     </form>
+    <label for="locale-select">Language</label>
+    <select id="locale-select"
+      v-model="currentLocale">
+      <option v-for="optionLocale in SUPPORT_LOCALES"
+        :key="optionLocale"
+        :value="optionLocale">
+        {{ optionLocale }}
+      </option>
+    </select>
+
   </main>
 </template>

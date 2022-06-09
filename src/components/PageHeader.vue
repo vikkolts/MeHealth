@@ -2,7 +2,6 @@
 import { onMounted, onUnmounted, ref } from "vue";
 import IconAdd28 from "../components/icons/IconAdd28.vue";
 import IconChevronBack24Vue from "./icons/IconChevronBack24.vue";
-import debounce from "./utils/debounce";
 
 const props = defineProps<{
   withAddButton?: boolean,
@@ -16,19 +15,15 @@ const emit = defineEmits<{
 const showSmallHeader = ref(false)
 
 onMounted(() => {
-  handleScroll();
   window.addEventListener('scroll', handleScroll);
 })
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll);
 })
 
-function debouncedHandleScroll(e: Event) {
+function handleScroll(e: Event) {
   window.pageYOffset > 35 ? showSmallHeader.value = true : showSmallHeader.value = false;
 }
-
-const handleScroll = debounce((e: Event) => debouncedHandleScroll(e), 30);
-
 </script>
 
 <template>
@@ -41,9 +36,9 @@ const handleScroll = debounce((e: Event) => debouncedHandleScroll(e), 30);
         @click="$router.go(-1)">
         <IconChevronBack24Vue />
       </button>
-      <label class="page-header__label body-text fixed top-[14px] left-[50%] font-semibold z-50 translate-x-[-50%] transition-all duration-100"
+      <label class="page-header__label body-text fixed top-[14px] left-[50%] font-semibold z-50 translate-x-[-50%] transition-all"
         :style="{ visibility: showSmallHeader ? 'visible' : 'hidden' }">
-        lala
+        {{ props.title }}
       </label>
       <button v-if="props.withAddButton"
         class="primary ml-auto"

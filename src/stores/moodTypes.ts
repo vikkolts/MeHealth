@@ -1,10 +1,11 @@
 import { clearIDB, deleteDBMoodRecord, getDBMoodRecords, getDBMoodsList, saveDBMoodRecord } from '@/api/idb';
 import { add } from 'date-fns';
-import { defineStore } from 'pinia';
+import { defineStore, storeToRefs } from 'pinia';
 
 export type RootState = {
   moodTypes: DBMood[];
   moodRecords: DBMoodRecord[];
+  statsAverageLabels: string[];
 };
 
 export type DBMoodRecord = {
@@ -19,11 +20,18 @@ export interface DBMood {
   emoji: string;
 }
 
+export type PercentsObject = {
+  week?: number;
+  month?: number;
+  year?: number;
+};
+
 export const useMoodTypesStore = defineStore({
   id: 'moodTypes',
   state: (): RootState => ({
     moodTypes: [],
     moodRecords: [],
+    statsAverageLabels: ['Terrible', 'Bad', 'BelowAverage', 'Average', 'Good', 'Great'],
   }),
   getters: {
     moodRecordListByPeriods: (state): { week: DBMoodRecord[]; month: DBMoodRecord[]; year: DBMoodRecord[] } => {
@@ -44,6 +52,30 @@ export const useMoodTypesStore = defineStore({
         month: monthArray,
         year: yearArray,
       };
+    },
+    moodPeriodsPercent(state): PercentsObject {
+      const percentObject: PercentsObject = {};
+      if (state.moodRecords.length === 0) return {};
+      if (this.moodRecordListByPeriods?.week.length !== 0) {
+        percentObject.week =
+          ((this.moodRecordListByPeriods.week.reduce((acc: number, cur: DBMoodRecord) => acc + cur.mood_id, 0) / this.moodRecordListByPeriods.week.length) *
+            100) /
+          state.moodTypes.length;
+      }
+      if (this.moodRecordListByPeriods?.month.length !== 0) {
+        percentObject.month =
+          ((this.moodRecordListByPeriods.month.reduce((acc: number, cur: DBMoodRecord) => acc + cur.mood_id, 0) / this.moodRecordListByPeriods.month.length) *
+            100) /
+          state.moodTypes.length;
+      }
+      if (this.moodRecordListByPeriods?.year.length !== 0) {
+        percentObject.year =
+          ((this.moodRecordListByPeriods.year.reduce((acc: number, cur: DBMoodRecord) => acc + cur.mood_id, 0) / this.moodRecordListByPeriods.year.length) *
+            100) /
+          state.moodTypes.length;
+      }
+
+      return percentObject;
     },
   },
   actions: {

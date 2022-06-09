@@ -33,5 +33,7 @@
   "Date": "Date",
   "SelectMood": "Select mood",
   "AdditionalInformation": "Additional information",
-  "Notes": "Notes"
+  "Notes": "Notes",
+  "InAverage": "In average",
+  "Tendency": "Tendency"
 }

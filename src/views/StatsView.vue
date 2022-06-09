@@ -1,18 +1,16 @@
 <script setup lang="ts">
 import PageHeader from "../components/PageHeader.vue"
-import { add, formatISO, parseISO, eachMonthOfInterval, startOfMonth, endOfMonth, format, isSameMonth } from 'date-fns'
-import { onMounted, ref, watch, onUnmounted } from "vue";
+import { parseISO, format } from 'date-fns'
+import { onMounted, ref, } from "vue";
 import AddMoodModal from "../components/AddMoodModal.vue";
-import { useMoodTypesStore, type DBMoodRecord } from "@/stores/moodTypes";
-import { storeToRefs } from 'pinia'
+import { useMoodTypesStore } from "@/stores/moodTypes";
 import { computed } from "@vue/reactivity";
-import { useRoute, useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
 import TheChart from '../components/TheChart.vue'
 
 const route = useRoute()
-const router = useRouter()
 const { t } = useI18n()
 
 const isOpenAddModal = ref(false);
@@ -26,7 +24,7 @@ type StatsType = {
 const statsTypes: StatsType = [{ id: 'week', title: t('Week') }, { id: 'month', title: t('Month') }, { id: 'year', title: t('Year') }]
 
 const computedTitle = computed(() => {
-  let title = route.params.type as string;
+  const title = statsTypes[selectedTab.value].id;
   if (title === 'week')
     return t('WeekStats');
   else if (title === 'month')
@@ -36,18 +34,28 @@ const computedTitle = computed(() => {
   else return ''
 })
 
+const computedDateRange = computed(() => {
+  if (!(selectedTab && store.moodRecords)) return;
+  const firstDate: string = format(parseISO(store.moodRecordListByPeriods[statsTypes[selectedTab.value].id][0].date), 'd MMM yyyy');
+  const lastDate: string = format(parseISO(store.moodRecordListByPeriods[statsTypes[selectedTab.value].id].at(-1)!.date), 'd MMM yyyy');
+  return firstDate + ' - ' + lastDate;
+})
+
 const foundTab = statsTypes.find(t => t.id === route.params.type)
 const foundTabIndex = foundTab ? statsTypes.indexOf(foundTab) : 0
 const selectedTab = ref(foundTabIndex);
+
+const statsLabel = computed(() => {
+  const typeProp = statsTypes[selectedTab.value].id;
+  const typePercent: number | undefined = store.moodPeriodsPercent[typeProp];
+  if (!typePercent) return;
+  return store.statsAverageLabels[Math.round(typePercent * store.statsAverageLabels.length / 100)];
+})
 
 onMounted(async () => {
   await store.getMoodRecordsList();
   await store.getMoodsList();
 })
-
-function pushNewTab(type: periodType) {
-  router.replace({ name: 'stats', params: { type: type } })
-}
 
 </script>
 
@@ -61,8 +69,14 @@ function pushNewTab(type: periodType) {
     <AddMoodModal v-model="isOpenAddModal"
       @record-created="store.getMoodRecordsList()" />
 
-    <section class="bg-white px-4 py-[11px]">
-      <TabGroup :selectedIndex="selectedTab">
+    <section v-if="statsLabel"
+      class="bg-white px-4 py-[11px]">
+      <label class="uppercase footnote system-gray-color font-semibold">{{ $t('InAverage') }}</label>
+      <h2 class="large-heading font-bold font-rounded">{{ $t(`Stats.${statsLabel}`) }}</h2>
+      <label class="subheadline system-gray-color font-semibold mb-2">{{ computedDateRange }}</label>
+
+      <TabGroup :selectedIndex="selectedTab"
+        @change="(index) => selectedTab = index">
         <TabList class="footnote flex rounded-lg cursor-pointer p-[2px] mood-radio-group"
           style="background-color: rgba(118, 118, 128, 0.12);">
           <Tab v-for="stat in statsTypes"
@@ -71,24 +85,25 @@ function pushNewTab(type: periodType) {
             v-slot="{ selected }">
             <button :class="[
               'w-full rounded-lg px-4 py-[6px] text-sm font-medium focus:outline-none relative',
-              selected
-                ? 'radio-checked'
-                : '',
-            ]"
-              @click="pushNewTab(stat.id)">
+              { 'radio-checked': selected }
+            ]">
               {{ stat.title }}
             </button>
           </Tab>
         </TabList>
 
-        <TabPanels class="mt-2">
+        <TabPanels class="mt-2 mb-6">
           <TabPanel v-for="(stat, idx) in statsTypes"
             :key="idx">
-            <TheChart :data="store.moodRecordListByPeriods.week"
+            <TheChart :data="store.moodRecordListByPeriods[stat.id]"
               :stats-type="stat.id" />
           </TabPanel>
         </TabPanels>
       </TabGroup>
+      <div class="border rounded-[10px] px-4 py-[14px] mb-4"
+        style="border-color: var(--system-gray-5)">
+        <label class="subheadline">{{ $t('Tendency') }}</label>
+      </div>
     </section>
   </main>
 </template>

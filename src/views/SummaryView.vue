@@ -1,34 +1,19 @@
 <script setup lang="ts">
 import PageHeader from "../components/PageHeader.vue"
 import ClosableCard from "../components/ClosableCard.vue"
-import { add, formatISO } from 'date-fns'
-import { onMounted, ref, watch } from "vue";
+import { formatISO } from 'date-fns'
+import { onMounted, ref } from "vue";
 import StatsCard from "@/components/StatsCard.vue";
 import AddMoodModal from "../components/AddMoodModal.vue";
-import { useMoodTypesStore, type DBMoodRecord } from "@/stores/moodTypes";
-import { storeToRefs } from 'pinia'
+import { useMoodTypesStore } from "@/stores/moodTypes";
 
 const title = ref('Pages.Summary');
 const isOpenAddModal = ref(false);
-const weekStatsPercent = ref(0);
-const monthStatsPercent = ref(0);
-const yearStatsPercent = ref(0);
 
 const store = useMoodTypesStore()
-const { moodRecords, moodTypes } = storeToRefs(store);
 onMounted(async () => {
   await store.getMoodRecordsList();
 })
-
-watch(moodRecords, () => {
-  setStatsInfo();
-})
-
-function setStatsInfo() {
-  weekStatsPercent.value = (store.moodRecordListByPeriods.week.reduce((acc, cur) => acc + cur.mood_id, 0) / store.moodRecordListByPeriods.week.length) * 100 / moodTypes.value.length;
-  monthStatsPercent.value = (store.moodRecordListByPeriods.month.reduce((acc, cur) => acc + cur.mood_id, 0) / store.moodRecordListByPeriods.month.length) * 100 / moodTypes.value.length;
-  yearStatsPercent.value = (store.moodRecordListByPeriods.year.reduce((acc, cur) => acc + cur.mood_id, 0) / store.moodRecordListByPeriods.year.length) * 100 / moodTypes.value.length;
-}
 
 function checkTimePeriod() {
   const currentTime = formatISO(new Date(), { representation: 'time' }).slice(0, 5);
@@ -59,13 +44,13 @@ checkTimePeriod();
     <div class="flex flex-col w-full gap-[6px]">
       <ClosableCard />
       <StatsCard :title="$t('WeekStats')"
-        :percent="weekStatsPercent"
+        :percent="store.moodPeriodsPercent?.week"
         @click="$router.push({ name: 'stats', params: { type: 'week' } })" />
       <StatsCard :title="$t('MonthStats')"
-        :percent="monthStatsPercent"
+        :percent="store.moodPeriodsPercent?.month"
         @click="$router.push({ name: 'stats', params: { type: 'month' } })" />
       <StatsCard :title="$t('YearStats')"
-        :percent="yearStatsPercent"
+        :percent="store.moodPeriodsPercent?.year"
         @click="$router.push({ name: 'stats', params: { type: 'year' } })" />
     </div>
     <AddMoodModal v-model="isOpenAddModal"

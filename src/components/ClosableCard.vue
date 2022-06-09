@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import IconAlertBg48 from "./icons/IconAlertBg48.vue";
-import IconDissmissCircleBg20 from "./icons/IconDissmissCircleBg20.vue";
+import IconDismissCircleBg20 from "./icons/IconDismissCircleBg20.vue";
 
 const emit = defineEmits<{
   (e: 'messageClick', event: Event): void
@@ -27,7 +27,7 @@ function closeSelf() {
       class="flex my-auto"
       :title="$t('Actions.Close')"
       @click.stop="closeSelf">
-      <IconDissmissCircleBg20 class="system-gray-color" />
+      <IconDismissCircleBg20 class="system-gray-color" />
     </button>
   </div>
 </template>

@@ -9,7 +9,7 @@ export async function getDb(): Promise<IDBDatabase> {
     if (DB) {
       return resolve(DB);
     }
-    console.log('OPENING DB', DB);
+    //console.log('OPENING DB', DB);
     let request: IDBOpenDBRequest = window.indexedDB.open(DB_NAME, DB_VERSION);
 
     request.onerror = (e: Event) => {

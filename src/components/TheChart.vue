@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { add, formatISO, parseISO, eachMonthOfInterval, startOfMonth, endOfMonth, format, isSameMonth, eachDayOfInterval, eachWeekOfInterval, getDay } from 'date-fns'
-import { onMounted, ref, watch, onUnmounted, watchEffect } from "vue";
+import { parseISO, eachMonthOfInterval, format, eachDayOfInterval, eachWeekOfInterval, getDay } from 'date-fns'
+import { onMounted, ref, watch, onUnmounted } from "vue";
 import { useMoodTypesStore, type DBMoodRecord } from "@/stores/moodTypes";
 import { computed } from "@vue/reactivity";
 import * as d3 from "d3";
@@ -93,7 +93,7 @@ function buildChart() {
           x="4"
           :y="chartWrapperBounding.height - 5"
           fill="currentColor"
-          class="font-semibold caption-1 system-gray-3-color">
+          class="font-semibold font-rounded caption-1 system-gray-3-color">
           {{ format(period, formatPeriodXAxis) }}
         </text>
       </g>

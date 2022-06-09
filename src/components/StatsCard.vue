@@ -1,16 +1,23 @@
 <script setup lang="ts">
+import { useMoodTypesStore } from '@/stores/moodTypes';
+import { computed } from '@vue/reactivity';
 import IconChevronRight16Vue from './icons/IconChevronRight16.vue';
 import IconDocumentLandscape20Vue from './icons/IconDocumentLandscape20.vue';
 
 const props = defineProps<{
   title: string,
-  percent: number,
+  percent?: number,
 }>()
 
+const store = useMoodTypesStore()
+const statsLabel = computed(() => {
+  return props.percent ? store.statsAverageLabels[Math.round(props.percent * store.statsAverageLabels.length / 100)] : null;
+})
 </script>
 
 <template>
-  <div class="closable-card cursor-pointer rounded-[10px] px-4 py-[12px] flex flex-col gap-4">
+  <div v-if="props.percent"
+    class="closable-card cursor-pointer rounded-[10px] px-4 py-[12px] flex flex-col gap-4">
     <div class="flex gap-1 w-full system-indigo-color items-center">
       <IconDocumentLandscape20Vue />
       <p class="subheadline font-semibold flex mr-auto">{{ props.title }}</p>
@@ -20,7 +27,7 @@ const props = defineProps<{
       <div class="thumb"
         :style="{ width: props.percent + '%' }"></div>
     </div>
-    <p class="title-3 font-bold font-rounded">{{ $t('Stats.Good') }}</p>
+    <p class="title-3 font-bold font-rounded">{{ $t(`Stats.${statsLabel}`) }}</p>
   </div>
 </template>
 

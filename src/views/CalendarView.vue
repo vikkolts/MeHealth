@@ -172,7 +172,7 @@ async function deleteRecord(id: number) {
         </div>
       </div>
       <section class="p-4 system-white-bg flex flex-col"
-        style="min-height: calc(100vh - 455px);">
+        style="min-height: calc(100vh - 464px);">
         <div v-if="selectedDayRecord"
           class="flex items-center pb-4">
           <h2 class="font-semibold body-text">

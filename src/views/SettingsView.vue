@@ -8,6 +8,14 @@ import {
   loadLocaleMessages,
 } from '@/i18n'
 import { ref, watch } from "vue";
+import ListItem from "@/components/ListItem.vue";
+import IconDarkThemeBg24 from "../components/icons/IconDarkThemeBg24.vue";
+import IconChevronRight16 from "../components/icons/IconChevronRight16.vue";
+import TheSwitch from "../components/TheSwitch.vue";
+import IconGlobeBg24 from "../components/icons/IconGlobeBg24.vue";
+import IconHandBg28 from "../components/icons/IconHandBg28.vue";
+import IconDatabaseBg24 from "../components/icons/IconDatabaseBg24.vue";
+import IconAlertBg24 from "../components/icons/IconAlertBg24.vue";
 
 const { locale, availableLocales, } = useI18n()
 const currentLocale = ref(locale.value)
@@ -64,7 +72,60 @@ async function importData(event: Event) {
 <template>
   <main>
     <PageHeader :title="$t('Pages.Settings')" />
-    <button class="bg-red-600 m-2 p-2 text-white rounded-lg"
+    <div class="list-group">
+      <ListItem>
+        <template #icon>
+          <IconDarkThemeBg24 />
+        </template>
+        {{ $t("Theme") }}
+        <template #side>
+          {{ $t("System") }}
+          <IconChevronRight16 />
+        </template>
+      </ListItem>
+
+      <ListItem>
+        <template #icon>
+          <IconAlertBg24 />
+        </template>
+        {{ $t("Notifications") }}
+        <template #side>
+          <TheSwitch />
+        </template>
+      </ListItem>
+
+      <ListItem>
+        <template #icon>
+          <IconDatabaseBg24 />
+        </template>
+        {{ $t("ManageData") }}
+        <template #side>
+          <IconChevronRight16 />
+        </template>
+      </ListItem>
+
+      <ListItem>
+        <template #icon>
+          <IconHandBg28 />
+        </template>
+        {{ $t("PrivacyPolicy") }}
+        <template #side>
+          <IconChevronRight16 />
+        </template>
+      </ListItem>
+
+      <ListItem>
+        <template #icon>
+          <IconGlobeBg24 />
+        </template>
+        {{ $t("Language") }}
+        <template #side>
+          {{ $t("Ukrainian") }}
+          <IconChevronRight16 />
+        </template>
+      </ListItem>
+    </div>
+    <!-- <button class="bg-red-600 m-2 p-2 text-white rounded-lg"
       @click="store.cleanDataBase()">CLEAR DB</button>
     <button class="bg-orange-600 m-2 p-2 text-white rounded-lg"
       @click="exportData">EXPORT DATA</button>
@@ -84,7 +145,7 @@ async function importData(event: Event) {
         :value="optionLocale">
         {{ optionLocale }}
       </option>
-    </select>
+    </select> -->
 
   </main>
 </template>

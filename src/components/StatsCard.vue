@@ -16,7 +16,7 @@ const statsLabel = computed(() => {
 </script>
 
 <template>
-  <div v-if="props.percent"
+  <div v-if="props.percent && statsLabel"
     class="system-white-bg cursor-pointer rounded-[10px] px-4 py-[12px] flex flex-col gap-4">
     <div class="flex gap-1 w-full system-indigo-color items-center">
       <IconDocumentLandscape20Vue />

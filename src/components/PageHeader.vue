@@ -47,7 +47,7 @@ function handleScroll(e: Event) {
         <IconAdd28 />
       </button>
     </div>
-    <h1 class="large-heading font-bold transition-all duration-100"
+    <h1 class="large-heading font-bold transition-all duration-100 mb-2"
       :style="{ visibility: showSmallHeader ? 'hidden' : 'visible' }"
       style="margin-top: calc(54px + env(safe-area-inset-top))">{{ props.title }}</h1>
   </div>

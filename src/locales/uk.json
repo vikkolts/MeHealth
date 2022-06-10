@@ -62,5 +62,15 @@
   "Delete": "Видалити",
   "Edit": "Змінити",
   "Record": "Запис",
-  "MoodOfDay": "Настрій дня"
+  "MoodOfDay": "Настрій дня",
+  "Theme": "Тема",
+  "Language": "Мова",
+  "Notifications": "Сповіщення",
+  "ManageData": "Керувати даними",
+  "PrivacyPolicy": "Політика приватності",
+  "System": "Системна",
+  "Dark": "Темна",
+  "Light": "Світла",
+  "Ukrainian": "Українська",
+  "English": "Англійська"
 }

@@ -52,6 +52,22 @@ const statsLabel = computed(() => {
   return store.statsAverageLabels[Math.round(typePercent * store.statsAverageLabels.length / 100)];
 })
 
+const tendency = computed(() => {
+  if (!store.moodRecordListByPeriods[statsTypes[selectedTab.value].id]) return;
+  const diffArray: number[] = [];
+  const usedMoodsCount = new Set();
+  store.moodRecordListByPeriods[statsTypes[selectedTab.value].id].forEach((currEl, index) => usedMoodsCount.add(currEl.mood_id));
+  store.moodRecordListByPeriods[statsTypes[selectedTab.value].id].forEach((currEl, index) => {
+    const nextEl = store.moodRecordListByPeriods[statsTypes[selectedTab.value].id][+index + 1];
+    const moodsCount = usedMoodsCount.size; // store.moodTypes.length;
+    if (nextEl) {
+      diffArray.push(nextEl.mood_id / moodsCount + currEl.mood_id / moodsCount);
+    }
+  })
+
+  return (diffArray.reduce((a, b) => a + b, 0) / diffArray.length) || 0;
+})
+
 onMounted(async () => {
   await store.getMoodRecordsList();
   await store.getMoodsList();
@@ -60,7 +76,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <main class="px-0 mb-96">
+  <main class="px-0">
     <PageHeader :title="computedTitle"
       :with-add-button="true"
       :with-back-button="true"
@@ -78,11 +94,13 @@ onMounted(async () => {
           <Tab v-for="stat in statsTypes"
             as="template"
             :key="stat.id"
-            v-slot="{ selected }">
+            v-slot="{ selected }"
+            :disabled="!store.moodRecordListByPeriods[stat.id].length">
             <button :class="[
               'w-full rounded-lg px-4 py-[6px] footnote font-medium focus:outline-none relative',
               { 'radio-checked': selected }
-            ]">
+            ]"
+              type="button">
               {{ stat.title }}
             </button>
           </Tab>
@@ -100,9 +118,10 @@ onMounted(async () => {
           </TabPanel>
         </TabPanels>
       </TabGroup>
-      <div class="border rounded-[10px] px-4 py-[14px] mb-4"
+      <div class="border rounded-[10px] px-4 py-[14px] mb-4 flex items-center justify-between"
         style="border-color: var(--system-gray-5)">
         <label class="subheadline">{{ $t('Tendency') }}</label>
+        <label>{{ tendency }}</label>
       </div>
     </section>
   </main>

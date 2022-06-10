@@ -62,5 +62,15 @@
   "Delete": "Delete",
   "Edit": "Edit",
   "Record": "Record",
-  "MoodOfDay": "Mood of the day"
+  "MoodOfDay": "Mood of the day",
+  "Theme": "Theme",
+  "Language": "Language",
+  "Notifications": "Notifications",
+  "ManageData": "Manage data",
+  "PrivacyPolicy": "Privacy policy",
+  "System": "System",
+  "Dark": "Dark",
+  "Light": "Light",
+  "Ukrainian": "Ukrainian",
+  "English": "English"
 }

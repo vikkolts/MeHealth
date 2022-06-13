@@ -34,7 +34,7 @@ const close = async () => {
 
 <template>
   <div v-if="offlineReady || needRefresh"
-    class="pwa-toast bg-white/50"
+    class="pwa-toast system-white-bg"
     role="alert">
     <div class="message">
       <span v-if="offlineReady">

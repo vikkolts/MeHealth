@@ -137,7 +137,7 @@ async function deleteRecord(id: number) {
               :class="[
                 { 'text-white': isEqual(day, selectedDay) },
                 {
-                  'text-red-500': !isEqual(day, selectedDay) &&
+                  'system-red-color': !isEqual(day, selectedDay) &&
                     isToday(day)
                 },
                 // {
@@ -145,7 +145,7 @@ async function deleteRecord(id: number) {
                 //     !isToday(day) &&
                 //     isSameMonth(day, firstDayCurrentMonth)
                 // },
-                { 'bg-red-500': isEqual(day, selectedDay) && isToday(day) },
+                { 'system-red-bg': isEqual(day, selectedDay) && isToday(day) },
                 {
                   'selected-calendar-day': isEqual(day, selectedDay) &&
                     !isToday(day)

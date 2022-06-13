@@ -1,4 +1,4 @@
 <template>
-  <input class="apple-switch"
+  <input class="apple-switch cursor-pointer"
     type="checkbox" />
 </template>

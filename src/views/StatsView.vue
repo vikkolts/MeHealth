@@ -52,21 +52,20 @@ const statsLabel = computed(() => {
   return store.statsAverageLabels[Math.round(typePercent * store.statsAverageLabels.length / 100)];
 })
 
-const tendency = computed(() => {
-  if (!store.moodRecordListByPeriods[statsTypes[selectedTab.value].id]) return;
-  const diffArray: number[] = [];
-  const usedMoodsCount = new Set();
-  store.moodRecordListByPeriods[statsTypes[selectedTab.value].id].forEach((currEl, index) => usedMoodsCount.add(currEl.mood_id));
-  store.moodRecordListByPeriods[statsTypes[selectedTab.value].id].forEach((currEl, index) => {
-    const nextEl = store.moodRecordListByPeriods[statsTypes[selectedTab.value].id][+index + 1];
-    const moodsCount = usedMoodsCount.size; // store.moodTypes.length;
-    if (nextEl) {
-      diffArray.push(nextEl.mood_id / moodsCount + currEl.mood_id / moodsCount);
-    }
-  })
+// const tendency = computed(() => {
+//   if (!store.moodRecordListByPeriods[statsTypes[selectedTab.value].id]) return;
+//   const diffArray: number[] = [];
+//   const moodIds = store.moodTypes.map(e => e.id)
+//   const moodsCount = Math.max(...moodIds) - Math.min(...moodIds);
+//   store.moodRecordListByPeriods[statsTypes[selectedTab.value].id].forEach((currEl, index) => {
+//     const nextEl = store.moodRecordListByPeriods[statsTypes[selectedTab.value].id][+index + 1];
+//     if (nextEl) {
+//       diffArray.push(nextEl.mood_id / moodsCount + currEl.mood_id / moodsCount);
+//     }
+//   })
 
-  return (diffArray.reduce((a, b) => a + b, 0) / diffArray.length) || 0;
-})
+//   return (diffArray.reduce((a, b) => a + b, 0) / diffArray.length) || 0;
+// })
 
 onMounted(async () => {
   await store.getMoodRecordsList();
@@ -118,11 +117,11 @@ onMounted(async () => {
           </TabPanel>
         </TabPanels>
       </TabGroup>
-      <div class="border rounded-[10px] px-4 py-[14px] mb-4 flex items-center justify-between"
+      <!-- <div class="border rounded-[10px] px-4 py-[14px] mb-4 flex items-center justify-between"
         style="border-color: var(--system-gray-5)">
         <label class="subheadline">{{ $t('Tendency') }}</label>
-        <label>{{ tendency }}</label>
-      </div>
+        <label>{{ tendency?.toFixed(2) }}</label>
+      </div> -->
     </section>
   </main>
 </template>

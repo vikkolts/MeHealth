@@ -2,23 +2,23 @@
 import { RouterView } from 'vue-router'
 import './index.css'
 import ReloadPrompt from './components/ReloadPrompt.vue'
-// import { watch, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import {
-  SUPPORT_LOCALES,
   setI18nLanguage,
   loadLocaleMessages,
 } from './i18n'
 import TheHeader from './components/TheHeader.vue'
 import { onMounted } from 'vue'
 
-// Temporary force uk lang on startup
-const { locale, availableLocales, } = useI18n()
+const { availableLocales, } = useI18n()
+// restore user selected lang
+const lsLang = localStorage.getItem('mehealth-lang');
 onMounted(async () => {
-  if (!availableLocales.includes('uk')) {
-    await loadLocaleMessages('uk');
+  const lang = lsLang || 'en'
+  if (!availableLocales.includes(lang)) {
+    await loadLocaleMessages(lang);
   }
-  setI18nLanguage('uk');
+  setI18nLanguage(lang);
 })
 </script>
 <template>

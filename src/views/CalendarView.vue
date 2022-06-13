@@ -200,7 +200,7 @@ async function deleteRecord(id: number) {
       </section>
       <button v-if="selectedDayRecord"
         type="button"
-        class="danger system-white-bg my-4 w-full py-1.5 px-4 text-left"
+        class="danger system-white-bg my-4 w-full py-2 px-4 text-left body-text"
         @click="deleteRecord(selectedDayRecord!.id as number)">
         {{ $t('Delete') }}
       </button>

@@ -4,7 +4,7 @@
 
 <template>
   <div name="list-item"
-    class="system-white-bg flex gap-4 px-4 items-center py-2 first-of-type:rounded-t-2xl last-of-type:rounded-b-2xl border-b cursor-pointer">
+    class="system-white-bg body-text flex gap-4 pl-4 pr-2.5 items-center py-2 first-of-type:rounded-t-2xl last-of-type:rounded-b-2xl border-b cursor-pointer min-h-[47px]">
     <slot name="icon"></slot>
     <slot></slot>
     <div class="ml-auto flex items-center gap-3 system-gray-color">

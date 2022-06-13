@@ -72,5 +72,12 @@
   "Dark": "Dark",
   "Light": "Light",
   "Ukrainian": "Ukrainian",
-  "English": "English"
+  "English": "English",
+  "ClearDB": "Clear database",
+  "ImportData": "Import data",
+  "ExportData": "Export data",
+  "ConfirmClearDB": "Confirm to clear database",
+  "SuccessfullyImportedRecords": "Successfully imported records",
+  "PrivacyPolicyDescription": "MeHealth doesn't store, collect or share any personal information. Mood records are stored locally on device.",
+  "Version": "Version"
 }

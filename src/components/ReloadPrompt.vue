@@ -30,6 +30,14 @@ const close = async () => {
   needRefresh.value = false
 }
 
+// function needsToSeePrompt() {
+//   if (navigator?.standalone) {
+//     return false;
+//   }
+//   let isApple = ['iPhone', 'iPad', 'iPod'].includes(navigator.platform);
+//   return isApple;
+// }
+
 </script>
 
 <template>
@@ -38,7 +46,7 @@ const close = async () => {
     role="alert">
     <div class="message">
       <span v-if="offlineReady">
-        App ready to work offline
+        App ready to work offline. Add to your home screen.
       </span>
       <span v-else>
         New content available, click on reload button to update.

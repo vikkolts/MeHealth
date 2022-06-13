@@ -109,7 +109,7 @@ async function addMoodRecord() {
         for="modal-notes">{{ $t('AdditionalInformation') }}</label>
       <textarea v-model="modal.notes"
         id="modal-notes"
-        class="item-white-bg resize-none rounded-[10px] p-4 body-text w-full"
+        class="item-white-bg resize-none rounded-[10px] p-4 body-text w-full mb-4"
         rows="15"
         :placeholder="$t('Notes')"></textarea>
     </form>

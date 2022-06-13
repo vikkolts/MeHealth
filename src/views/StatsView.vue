@@ -79,17 +79,16 @@ onMounted(async () => {
     <PageHeader :title="computedTitle"
       :with-add-button="true"
       :with-back-button="true"
-      class="px-4"
+      class="px-4-safe"
       @button-click="isOpenAddModal = true" />
     <AddMoodModal v-model="isOpenAddModal"
       @record-created="store.getMoodRecordsList()" />
 
     <section v-if="statsLabel"
-      class="chart-bg px-4 py-[11px]">
+      class="chart-bg px-4-safe py-[11px]">
       <TabGroup :selectedIndex="selectedTab"
         @change="(index) => selectedTab = index">
-        <TabList class="footnote flex rounded-lg cursor-pointer p-[2px] mood-radio-group"
-          style="background-color: rgba(118, 118, 128, 0.12);">
+        <TabList class="footnote flex rounded-lg cursor-pointer p-[2px] mood-radio-group radio-group-bg">
           <Tab v-for="stat in statsTypes"
             as="template"
             :key="stat.id"
@@ -117,7 +116,7 @@ onMounted(async () => {
           </TabPanel>
         </TabPanels>
       </TabGroup>
-      <!-- <div class="border rounded-[10px] px-4 py-[14px] mb-4 flex items-center justify-between"
+      <!-- <div class="border rounded-[10px] px-4-safe py-[14px] mb-4 flex items-center justify-between"
         style="border-color: var(--system-gray-5)">
         <label class="subheadline">{{ $t('Tendency') }}</label>
         <label>{{ tendency?.toFixed(2) }}</label>

@@ -45,8 +45,8 @@ async function importData(event: Event) {
   reader.readAsText(file);
 }
 
-function confirmClearDB(text: string) {
-  let isConfirmed = confirm(text)
+function confirmClearDB() {
+  let isConfirmed = confirm(t('ConfirmClearDB'))
   if (isConfirmed) store.cleanDataBase()
 }
 </script>
@@ -55,15 +55,15 @@ function confirmClearDB(text: string) {
   <main class="px-0">
     <PageHeader :title="$t('ManageData')"
       with-back-button
-      class="px-4" />
+      class="px-4-safe" />
 
     <button type="button"
-      class="primary item-white-bg w-full py-2 px-4 text-left body-text border-b-[0.5px]"
+      class="primary item-white-bg min-h-[44px] w-full py-2 px-4-safe text-left body-text"
       @click="exportData">
       {{ $t('ExportData') }}
     </button>
     <button type="button"
-      class="primary item-white-bg w-full py-2 px-4 text-left body-text"
+      class="primary item-white-bg min-h-[44px] my-4 w-full py-2 px-4-safe text-left body-text"
       @click="(importFileInput as HTMLInputElement).click()">
       {{ $t('ImportData') }}
     </button>
@@ -74,8 +74,8 @@ function confirmClearDB(text: string) {
       accept="application/json"
       @change="importData" />
     <button type="button"
-      class="danger item-white-bg my-4 w-full py-2 px-4 text-left body-text"
-      @click="confirmClearDB($t('ConfirmClearDB'))">
+      class="danger item-white-bg min-h-[44px] w-full py-2 px-4-safe text-left body-text"
+      @click="confirmClearDB">
       {{ $t('ClearDB') }}
     </button>
   </main>

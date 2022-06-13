@@ -10,9 +10,9 @@ const {
   updateServiceWorker,
 } = useRegisterSW({
   immediate: true,
-  onRegistered(r:any) {
+  onRegistered(r: any) {
     if (reloadSW === 'true') {
-      r && setInterval(async() => {
+      r && setInterval(async () => {
         // eslint-disable-next-line no-console
         console.log('Checking for sw update')
         await r.update()
@@ -25,7 +25,7 @@ const {
   },
 })
 
-const close = async() => {
+const close = async () => {
   offlineReady.value = false
   needRefresh.value = false
 }
@@ -33,11 +33,9 @@ const close = async() => {
 </script>
 
 <template>
-  <div
-    v-if="offlineReady || needRefresh"
-    class="pwa-toast"
-    role="alert"
-  >
+  <div v-if="offlineReady || needRefresh"
+    class="pwa-toast bg-white/50"
+    role="alert">
     <div class="message">
       <span v-if="offlineReady">
         App ready to work offline
@@ -46,7 +44,8 @@ const close = async() => {
         New content available, click on reload button to update.
       </span>
     </div>
-    <button v-if="needRefresh" @click="updateServiceWorker()">
+    <button v-if="needRefresh"
+      @click="updateServiceWorker()">
       Reload
     </button>
     <button @click="close">
@@ -68,9 +67,11 @@ const close = async() => {
   text-align: left;
   box-shadow: 3px 4px 5px 0px #8885;
 }
+
 .pwa-toast .message {
   margin-bottom: 8px;
 }
+
 .pwa-toast button {
   border: 1px solid #8885;
   outline: none;

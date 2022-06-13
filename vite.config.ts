@@ -15,7 +15,9 @@ export default defineConfig({
         name: 'MeHealth - your mood tracker',
         short_name: 'MeHealth',
         description: 'This app allows to track your mood in iOS like app style with calendar. No user trackers, runs offline',
-        theme_color: '#ffffff',
+        theme_color: '#f2f1f6',
+        background_color: '#000000',
+        display: 'standalone',
         icons: [
           {
             src: 'img/icons/pwa-192x192.png',

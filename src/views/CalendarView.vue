@@ -84,10 +84,9 @@ async function deleteRecord(id: number) {
 </script>
 
 <template>
-  <main class="px-0"
-    style="padding-bottom: calc(49px + env(safe-area-inset-bottom));">
+  <main class="px-0">
     <PageHeader :title="$t('Pages.Calendar')"
-      class="px-4"
+      class="px-4-safe"
       :with-add-button="true"
       @button-click="openAddModal()" />
     <AddMoodModal v-model="isOpenAddModal"
@@ -96,7 +95,7 @@ async function deleteRecord(id: number) {
 
     <div class="mx-auto">
       <div>
-        <div class="flex items-center py-2 px-4">
+        <div class="flex items-center py-2 px-4-safe">
           <h2 class="flex-auto font-semibold body-text">
             {{ $t(format(firstDayCurrentMonth, 'MMMM')) }} {{ format(firstDayCurrentMonth, 'yyyy') }}
           </h2>
@@ -195,7 +194,7 @@ async function deleteRecord(id: number) {
       </section>
       <button v-if="selectedDayRecord"
         type="button"
-        class="danger item-white-bg my-4 w-full py-2 px-4 text-left body-text"
+        class="danger item-white-bg my-4 w-full py-2 px-4-safe text-left body-text min-h-[44px]"
         @click="deleteRecord(selectedDayRecord!.id as number)">
         {{ $t('Delete') }}
       </button>

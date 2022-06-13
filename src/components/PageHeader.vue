@@ -28,7 +28,8 @@ function handleScroll(e: Event) {
 
 <template>
   <div class="page-header">
-    <div class="flex h-[50px] fixed top-0 right-0 left-0 pl-[9px] pr-4 z-50 transition-all duration-200"
+    <div class="flex fixed top-0 right-0 left-0 pl-[9px] pr-4 z-50 transition-all duration-200"
+      style="padding-top: env(safe-area-inset-top); height: calc(50px + env(safe-area-inset-top));"
       :class="showSmallHeader ? 'nav-header-bg' : 'system-color-background'">
       <button v-if="props.withBackButton"
         class="primary mr-auto"
@@ -36,8 +37,9 @@ function handleScroll(e: Event) {
         @click="$router.go(-1)">
         <IconChevronBack24Vue />
       </button>
-      <label class="page-header__label body-text fixed top-[14px] left-[50%] font-semibold z-50 translate-x-[-50%] transition-all"
-        :style="{ visibility: showSmallHeader ? 'visible' : 'hidden' }">
+      <label class="page-header__label body-text fixed left-[50%] font-semibold z-50 translate-x-[-50%] transition-all"
+        :style="{ visibility: showSmallHeader ? 'visible' : 'hidden' }"
+        style="top: calc(14px + env(safe-area-inset-top));">
         {{ props.title }}
       </label>
       <button v-if="props.withAddButton"
@@ -49,6 +51,6 @@ function handleScroll(e: Event) {
     </div>
     <h1 class="large-heading font-bold transition-all duration-100 mb-2"
       :style="{ visibility: showSmallHeader ? 'hidden' : 'visible' }"
-      style="margin-top: calc(54px + env(safe-area-inset-top))">{{ props.title }}</h1>
+      style="padding-top: calc(54px + env(safe-area-inset-top))">{{ props.title }}</h1>
   </div>
 </template>

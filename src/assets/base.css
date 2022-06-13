@@ -92,6 +92,7 @@
     --meter-middle: var(--c-meter-middle-d);
     --meter-end: var(--c-meter-end-d);
     --item-white-bg: var(--c-bg-item-d);
+    --radio-group-bg: hsla(240 4% 48% / 32%);
     --modal-bg: var(--c-modal-bg-d);
     --placeholder-color: var(--c-placeholder-d);
     --radio-checked-bg: var(--c-radio-checked-bg-d);
@@ -123,6 +124,7 @@ html[data-color-scheme='dark'] {
   --meter-middle: var(--c-meter-middle-d);
   --meter-end: var(--c-meter-end-d);
   --item-white-bg: var(--c-bg-item-d);
+  --radio-group-bg: hsla(240 4% 48% / 32%);
   --modal-bg: var(--c-modal-bg-d);
   --placeholder-color: var(--c-placeholder-d);
   --radio-checked-bg: var(--c-radio-checked-bg-d);
@@ -195,7 +197,7 @@ html[data-color-scheme='dark'] {
 }
 
 body {
-  /* min-height: 100vh; */
+  min-height: 100vh;
   color: var(--color-text);
   background: var(--color-background);
   transition: color 0.15s, background-color 0.15s;
@@ -205,6 +207,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   user-select: none;
+}
+
+@media (display-mode: standalone) {
+  body {
+    -webkit-tap-highlight-color: transparent;
+  }
 }
 
 pre {
@@ -261,6 +269,7 @@ pre {
 header.nav-header {
   position: fixed;
   bottom: 0;
+  padding-bottom: env(safe-area-inset-bottom);
   width: 100%;
   height: calc(49px + env(safe-area-inset-bottom));
 }
@@ -286,12 +295,16 @@ button.primary {
 }
 
 main {
-  padding-top: env(safe-area-inset-top);
   padding-left: calc(16px + env(safe-area-inset-left));
   padding-right: calc(16px + env(safe-area-inset-right));
-  padding-bottom: calc(49px + env(safe-area-inset-bottom));
   max-width: 768px;
   margin: 0 auto;
+  padding-bottom: calc(49px + env(safe-area-inset-bottom));
+}
+
+.px-4-safe {
+  padding-left: calc(16px + env(safe-area-inset-left));
+  padding-right: calc(16px + env(safe-area-inset-right));
 }
 
 .system-white-bg {
@@ -408,4 +421,8 @@ input.apple-switch:checked:after {
 .selected-calendar-day {
   background-color: var(--selected-calendar-bg);
   color: var(--card-color-background);
+}
+
+.list-item-bg {
+  background-color: var(--card-color-background);
 }

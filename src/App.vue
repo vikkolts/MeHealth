@@ -13,10 +13,11 @@ import { useAppSettingsStore } from './stores/appSettings'
 
 const { availableLocales, } = useI18n()
 const store = useAppSettingsStore();
+// restore theme
+document.documentElement.setAttribute('data-color-scheme', store.appTheme === 'Dark' ? 'dark' : store.appTheme === 'Light' ? 'light' : 'system');
+document.querySelector('meta[name="theme-color"]')?.setAttribute('content', store.appTheme === 'Dark' || store.appTheme === 'System' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? '#000000' : '#f2f1f6');
 // restore user selected lang
 const lsLang = localStorage.getItem('mehealth-lang');
-document.documentElement.setAttribute('data-color-scheme', store.appTheme === 'Dark' ? 'dark' : store.appTheme === 'Light' ? 'light' : 'system');
-//document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'true' ? '#373c49' : '#ffffff');
 onMounted(async () => {
   const lang = lsLang || 'en'
   if (!availableLocales.includes(lang)) {

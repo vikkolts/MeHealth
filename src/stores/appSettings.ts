@@ -22,7 +22,12 @@ export const useAppSettingsStore = defineStore({
       this.appTheme = theme;
       localStorage.setItem('mehealth-theme', theme);
       document.documentElement.setAttribute('data-color-scheme', theme === 'Dark' ? 'dark' : theme === 'Light' ? 'light' : 'system');
-      //document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'true' ? '#373c49' : '#ffffff');
+      document
+        .querySelector('meta[name="theme-color"]')
+        ?.setAttribute(
+          'content',
+          theme === 'Dark' || (theme === 'System' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? '#000000' : '#f2f1f6'
+        );
     },
     setNotificationsSettings() {
       this.isNotifications = !this.isNotifications;

@@ -5,7 +5,6 @@ export type LangType = 'en' | 'uk';
 
 export type AppRootState = {
   appTheme: ThemeType;
-  //appLang: LangType;
   isNotifications: boolean;
 };
 
@@ -15,7 +14,6 @@ export const useAppSettingsStore = defineStore({
   id: 'appSettingsTypes',
   state: (): AppRootState => ({
     appTheme: (localStorage.getItem('mehealth-theme') as ThemeType) || 'System',
-    //appLang: (localStorage.getItem('mehealth-lang') as LangType) || 'en',
     isNotifications: isPushActive,
   }),
   getters: {},
@@ -23,14 +21,16 @@ export const useAppSettingsStore = defineStore({
     setTheme(theme: ThemeType) {
       this.appTheme = theme;
       localStorage.setItem('mehealth-theme', theme);
+      document.documentElement.setAttribute('data-color-scheme', theme === 'Dark' ? 'dark' : theme === 'Light' ? 'light' : 'system');
+      //document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'true' ? '#373c49' : '#ffffff');
     },
     setNotificationsSettings() {
       this.isNotifications = !this.isNotifications;
       localStorage.setItem('mehealth-push-active', this.isNotifications ? 'true' : 'false');
     },
     setLang(lang: LangType) {
-      //this.appLang = lang;
       localStorage.setItem('mehealth-lang', lang);
+      document.documentElement.setAttribute('lang', lang);
     },
   },
 });

@@ -17,13 +17,13 @@ const statsLabel = computed(() => {
 
 <template>
   <div v-if="props.percent && statsLabel"
-    class="system-white-bg cursor-pointer rounded-[10px] px-4 py-[12px] flex flex-col gap-4">
-    <div class="flex gap-1 w-full system-indigo-color items-center">
+    class="system-white-bg cursor-pointer rounded-[10px] px-4 py-[12px] flex flex-col">
+    <div class="flex gap-1 w-full system-indigo-color items-center mb-4">
       <IconDocumentLandscape20Vue />
       <p class="subheadline font-semibold flex mr-auto">{{ props.title }}</p>
       <IconChevronRight16Vue class="system-gray-3-color" />
     </div>
-    <div class="custom-meter my-1">
+    <div class="custom-meter mt-1 mb-3">
       <div class="thumb"
         :style="{ width: props.percent + '%' }"></div>
     </div>

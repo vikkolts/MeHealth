@@ -1,26 +1,80 @@
 /* COLORS */
 :root {
-  --system-red: #fe3d2f;
-  --system-indigo: #5856d6;
-  --system-blue: #007aff;
+  --c-red: #fe3d2f;
+  --c-indigo: #5856d6;
+  --c-blue: #007aff;
+  --c-text: #000000;
+  --c-background: #f2f1f6;
+  --card-c-background: white;
+  --navbar-c-background: hsla(0 0% 98% / 94%);
+  --c-gray-6: #f2f2f7;
+  --c-gray-5: #e5e5ea;
+  --c-gray-3: #c7c7cc;
+  --c-gray: #8e8e93;
 
-  --color-text: #000000;
-  --color-background: #f2f1f6;
-  --card-color-background: white;
-  --navbar-color-background: hsla(0 0% 98% / 94%);
-  --tab-group-color-background: hsla(240 4% 48% / 12%);
-  --system-gray-6: #f2f2f7;
-  --system-gray-5: #e5e5ea;
-  --system-gray-3: #c7c7cc;
-  --system-gray: #8e8e93;
+  /* DARK THEME COLORS */
+  --c-red-d: #ff453a;
+  --c-indigo-d: #5e5ce6;
+  --c-blue-d: #0a84ff;
+  --c-text-d: #fff;
+  --c-background-d: #000;
+  --card-c-background-d: #1c1c1e;
+  --navbar-c-background-d: hsla(0 0% 11% / 94%);
+  --c-gray-6-d: #1c1c1e;
+  --c-gray-5-d: #2c2c2e;
+  --c-gray-3-d: #48484a;
+  --c-gray-d: #8e8e93;
 }
 
-/* TODO: DARK THEME */
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    
+:root {
+  --system-red: var(--c-red);
+  --system-indigo: var(--c-indigo);
+  --system-blue: var(--c-blue);
+  --color-text: var(--c-text);
+  --color-background: var(--c-background);
+  --card-color-background: var(--card-c-background);
+  --navbar-color-background: var(--navbar-c-background);
+  --system-gray-6: var(--c-gray-6);
+  --system-gray-5: var(--c-gray-5);
+  --system-gray-3: var(--c-gray-3);
+  --system-gray: var(--c-gray);
+}
+
+/* DARK THEME */
+@media (prefers-color-scheme: dark) {
+  /* Don't turn dark theme when 'Light' is chosen */
+  :root:not([data-color-scheme='light']) {
+    --system-red: var(--c-red-d);
+    --system-indigo: var(--c-indigo-d);
+    --system-blue: var(--c-blue-d);
+    --color-text: var(--c-text-d);
+    --color-background: var(--c-background-d);
+    --card-color-background: var(--card-c-background-d);
+    --navbar-color-background: var(--navbar-c-background-d);
+    --system-gray-6: var(--c-gray-6-d);
+    --system-gray-5: var(--c-gray-5-d);
+    --system-gray-3: var(--c-gray-3-d);
+    --system-gray: var(--c-gray-d);
   }
-} */
+}
+
+html[data-color-scheme='dark'] {
+  color-scheme: dark;
+}
+
+:root[data-color-scheme='dark'] {
+  --system-red: var(--c-red-d);
+  --system-indigo: var(--c-indigo-d);
+  --system-blue: var(--c-blue-d);
+  --color-text: var(--c-text-d);
+  --color-background: var(--c-background-d);
+  --card-color-background: var(--card-c-background-d);
+  --navbar-color-background: var(--navbar-c-background-d);
+  --system-gray-6: var(--c-gray-6-d);
+  --system-gray-5: var(--c-gray-5-d);
+  --system-gray-3: var(--c-gray-3-d);
+  --system-gray: var(--c-gray-d);
+}
 
 .system-gray-color {
   color: var(--system-gray);

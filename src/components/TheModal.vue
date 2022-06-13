@@ -61,8 +61,7 @@ const setIsOpen = (value: boolean) => {
           leave="transition ease-in-out duration-300 transform"
           leave-from="translate-y-0"
           leave-to="translate-y-full">
-          <DialogPanel class="w-full h-full max-w-3xl mx-auto rounded-t-[10px] px-4"
-            style="background: var(--color-background);">
+          <DialogPanel class="w-full h-full max-w-3xl mx-auto rounded-t-[10px] px-4 modal-bg">
             <div class="modal-header-wrapper w-full h-[54px] text-center items-center flex">
               <div class="w-1/4 text-left">
                 <button type="button"

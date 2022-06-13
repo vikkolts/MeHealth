@@ -10,7 +10,15 @@
   --c-gray-6: #f2f2f7;
   --c-gray-5: #e5e5ea;
   --c-gray-3: #c7c7cc;
+  --c-gray-2: #8e8e93;
   --c-gray: #8e8e93;
+  --c-meter-start: #ff3b30;
+  --c-meter-middle: #ffcc00;
+  --c-meter-end: #34c759;
+  --c-bg-item: #fff;
+  --c-placeholder: hsla(240 6% 25% / 60%);
+  --c-radio-checked-bg: white;
+  --c-chart-bg: white;
 
   /* DARK THEME COLORS */
   --c-red-d: #ff453a;
@@ -23,7 +31,16 @@
   --c-gray-6-d: #1c1c1e;
   --c-gray-5-d: #2c2c2e;
   --c-gray-3-d: #48484a;
+  --c-gray-2-d: #636366;
   --c-gray-d: #8e8e93;
+  --c-meter-start-d: hsla(3 100% 59% / 75%);
+  --c-meter-middle-d: hsla(48 100% 50% / 75%);
+  --c-meter-end-d: hsla(135 59% 49% / 75%);
+  --c-bg-item-d: #2c2c2e;
+  --c-modal-bg-d: #1c1c1e;
+  --c-placeholder-d: hsla(240 6% 25% / 60%);
+  --c-radio-checked-bg-d: #636366;
+  --c-chart-bg-d: #000;
 }
 
 :root {
@@ -37,7 +54,19 @@
   --system-gray-6: var(--c-gray-6);
   --system-gray-5: var(--c-gray-5);
   --system-gray-3: var(--c-gray-3);
+  --system-gray-2: var(--c-gray-2);
   --system-gray: var(--c-gray);
+  --meter-start: var(--c-meter-start);
+  --meter-middle: var(--c-meter-middle);
+  --meter-end: var(--c-meter-end);
+  --item-white-bg: var(--c-bg-item);
+  --radio-group-bg: hsla(240 4% 48% / 12%);
+  --modal-bg: var(--c-background);
+  --placeholder-color: var(--c-placeholder);
+  --radio-checked-bg: var(--c-radio-checked-bg);
+  --chart-bg: var(--c-chart-bg);
+  --border-color: var(--c-gray-3);
+  --selected-calendar-bg: black;
 }
 
 /* DARK THEME */
@@ -54,7 +83,18 @@
     --system-gray-6: var(--c-gray-6-d);
     --system-gray-5: var(--c-gray-5-d);
     --system-gray-3: var(--c-gray-3-d);
+    --system-gray-2: var(--c-gray-2-d);
     --system-gray: var(--c-gray-d);
+    --meter-start: var(--c-meter-start-d);
+    --meter-middle: var(--c-meter-middle-d);
+    --meter-end: var(--c-meter-end-d);
+    --item-white-bg: var(--c-bg-item-d);
+    --modal-bg: var(--c-modal-bg-d);
+    --placeholder-color: var(--c-placeholder-d);
+    --radio-checked-bg: var(--c-radio-checked-bg-d);
+    --chart-bg: var(--c-chart-bg-d);
+    --border-color: var(--c-gray-3-d);
+    --selected-calendar-bg: white;
   }
 }
 
@@ -73,7 +113,28 @@ html[data-color-scheme='dark'] {
   --system-gray-6: var(--c-gray-6-d);
   --system-gray-5: var(--c-gray-5-d);
   --system-gray-3: var(--c-gray-3-d);
+  --system-gray-2: var(--c-gray-2-d);
   --system-gray: var(--c-gray-d);
+  --meter-start: var(--c-meter-start-d);
+  --meter-middle: var(--c-meter-middle-d);
+  --meter-end: var(--c-meter-end-d);
+  --item-white-bg: var(--c-bg-item-d);
+  --modal-bg: var(--c-modal-bg-d);
+  --placeholder-color: var(--c-placeholder-d);
+  --radio-checked-bg: var(--c-radio-checked-bg-d);
+  --chart-bg: var(--c-chart-bg-d);
+  --border-color: var(--c-gray-3-d);
+  --selected-calendar-bg: white;
+}
+
+::placeholder {
+  color: var(--placeholder-color);
+}
+::-webkit-input-placeholder {
+  color: var(--placeholder-color);
+}
+::-moz-placeholder {
+  color: var(--placeholder-color);
 }
 
 .system-gray-color {
@@ -102,6 +163,10 @@ html[data-color-scheme='dark'] {
 
 .system-gray-3-bg {
   background-color: var(--system-gray-3);
+}
+
+.system-gray-2-bg {
+  background-color: var(--system-gray-2);
 }
 
 .system-gray-6-bg {
@@ -224,7 +289,7 @@ main {
   width: 100%;
   height: 6px;
   border-radius: 10px;
-  background: linear-gradient(270deg, #34c759 0%, #ffcc00 50.52%, #ff3b30 100%);
+  background: linear-gradient(270deg, var(--meter-start) 0%, var(--meter-middle) 50.52%, var(--meter-end) 100%);
 }
 
 .custom-meter div.thumb {
@@ -257,7 +322,7 @@ main {
 }
 
 .radio-checked {
-  background-color: white;
+  background-color: var(--radio-checked-bg);
   border-radius: 6.93px;
   box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.12), 0px 3px 1px rgba(0, 0, 0, 0.04);
   z-index: 10;
@@ -303,4 +368,31 @@ input.apple-switch:checked:after {
   left: 20px;
   background-color: #ffffff;
   /* box-shadow: -2px 4px 3px rgba(0, 0, 0, 0.05); */
+}
+
+.item-white-bg {
+  background-color: var(--item-white-bg);
+}
+
+.radio-group-bg {
+  background-color: var(--radio-group-bg);
+}
+
+.chart-bg {
+  background-color: var(--chart-bg);
+}
+
+*,
+::before,
+::after {
+  border-color: var(--border-color);
+}
+
+.modal-bg {
+  background: var(--modal-bg);
+}
+
+.selected-calendar-day {
+  background-color: var(--selected-calendar-bg);
+  color: var(--card-color-background);
 }

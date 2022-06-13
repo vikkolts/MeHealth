@@ -81,7 +81,7 @@ async function addMoodRecord() {
     @submit-clicked="addMoodRecord"
     :form-valid="formValid">
     <form @submit.prevent="addMoodRecord">
-      <div class="system-white-bg px-4 py-[5px] flex justify-between items-center rounded-[10px] mb-8">
+      <div class="item-white-bg px-4 py-[5px] flex justify-between items-center rounded-[10px] mb-8 item-white-bg">
         <label class="body-text"
           for="modal-date-picker">{{ $t('Date') }}</label>
         <input v-model="modal.date"
@@ -95,8 +95,7 @@ async function addMoodRecord() {
         aria-required="true"
         class="items-center mb-8">
         <RadioGroupLabel class="footnote block ml-2 mb-[6px] uppercase system-gray-color">{{ $t('SelectMood') }}</RadioGroupLabel>
-        <div class="grid grid-cols-6 rounded-lg cursor-pointer p-[2px] mood-radio-group"
-          style="background-color: rgba(118, 118, 128, 0.12);">
+        <div class="grid grid-cols-6 rounded-lg cursor-pointer p-[2px] mood-radio-group radio-group-bg">
           <RadioGroupOption v-for="m in moodTypes"
             :key="m.id"
             v-slot="{ checked }"
@@ -110,7 +109,7 @@ async function addMoodRecord() {
         for="modal-notes">{{ $t('AdditionalInformation') }}</label>
       <textarea v-model="modal.notes"
         id="modal-notes"
-        class="resize-none rounded-[10px] p-4 body-text w-full"
+        class="item-white-bg resize-none rounded-[10px] p-4 body-text w-full"
         rows="15"
         :placeholder="$t('Notes')"></textarea>
     </form>

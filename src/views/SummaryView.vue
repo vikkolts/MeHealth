@@ -42,7 +42,8 @@ checkTimePeriod();
       :with-add-button="true"
       @button-click="isOpenAddModal = true" />
     <div class="flex flex-col w-full gap-[6px]">
-      <ClosableCard @click="isOpenAddModal = true" />
+      <ClosableCard @click="isOpenAddModal = true"
+        class="mb-2" />
       <StatsCard :title="$t('WeekStats')"
         :percent="store.moodPeriodsPercent?.week"
         @click="$router.push({ name: 'stats', params: { type: 'week' } })" />

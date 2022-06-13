@@ -85,7 +85,7 @@ onMounted(async () => {
       @record-created="store.getMoodRecordsList()" />
 
     <section v-if="statsLabel"
-      class="system-white-bg px-4 py-[11px]">
+      class="chart-bg px-4 py-[11px]">
       <TabGroup :selectedIndex="selectedTab"
         @change="(index) => selectedTab = index">
         <TabList class="footnote flex rounded-lg cursor-pointer p-[2px] mood-radio-group"

@@ -113,7 +113,7 @@ async function deleteRecord(id: number) {
             <IconChevronRight24 />
           </button>
         </div>
-        <div class="grid grid-cols-7 text-center caption-1 font-semibold system-gray-color sticky top-[50px] system-color-background border-b">
+        <div class="grid grid-cols-7 text-center caption-1 font-semibold system-gray-color sticky top-[50px] border-b-[0.5px] modal-bg">
           <div class="pl-4">{{ $t('Mon') }}</div>
           <div>{{ $t('Tue') }}</div>
           <div>{{ $t('Wed') }}</div>
@@ -129,7 +129,7 @@ async function deleteRecord(id: number) {
               dayIdx === 0 && colStartClasses[getDay(day)],
               { 'pr-4': getDay(day) === 0 },
               { 'pl-4': getDay(day) === 1 },
-              { 'border-t': getWeekOfMonth(day, { weekStartsOn: 1 }) !== 1 },
+              { 'border-t-[0.5px]': getWeekOfMonth(day, { weekStartsOn: 1 }) !== 1 },
               'pt-1 pb-1.5'
             ]">
             <button type="button"
@@ -147,7 +147,7 @@ async function deleteRecord(id: number) {
                 // },
                 { 'bg-red-500': isEqual(day, selectedDay) && isToday(day) },
                 {
-                  'bg-gray-900': isEqual(day, selectedDay) &&
+                  'selected-calendar-day': isEqual(day, selectedDay) &&
                     !isToday(day)
                 },
                 { 'hover:bg-gray-200': !isEqual(day, selectedDay) },
@@ -161,12 +161,12 @@ async function deleteRecord(id: number) {
 
             <div class="w-1 h-1 mx-auto mt-1">
               <div v-if="moodRecords.some((record) => isSameDay(parseISO(record.date), day))"
-                class="w-1 h-1 rounded-full system-gray-3-bg"></div>
+                class="w-1 h-1 rounded-full system-gray-2-bg"></div>
             </div>
           </div>
         </div>
       </div>
-      <section class="p-4 system-white-bg flex flex-col"
+      <section class="p-4 chart-bg flex flex-col"
         style="min-height: calc(100vh - 464px);">
         <div v-if="selectedDayRecord"
           class="flex items-center pb-4">
@@ -195,7 +195,7 @@ async function deleteRecord(id: number) {
       </section>
       <button v-if="selectedDayRecord"
         type="button"
-        class="danger system-white-bg my-4 w-full py-2 px-4 text-left body-text"
+        class="danger item-white-bg my-4 w-full py-2 px-4 text-left body-text"
         @click="deleteRecord(selectedDayRecord!.id as number)">
         {{ $t('Delete') }}
       </button>

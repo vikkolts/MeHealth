@@ -1,0 +1,1 @@
+import{d as t,o as a,c as i,h as n,i as o,b as c,l}from"./index.204e82cd.js";const m=t({__name:"SettingsPrivacyPolicy",setup(s){return(e,r)=>(a(),i("main",null,[n(o,{title:e.$t("PrivacyPolicy"),"with-back-button":""},null,8,["title"]),c("p",null,l(e.$t("PrivacyPolicyDescription")),1)]))}});export{m as default};

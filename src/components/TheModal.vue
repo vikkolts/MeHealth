@@ -53,7 +53,7 @@ const setIsOpen = (value: boolean) => {
 
       <!-- Full-screen container to center the panel -->
       <div class="fixed inset-0 flex items-center justify-center"
-        style="padding-top: calc(2rem + env(safe-area-inset-top))">
+        style="padding: calc(2rem + env(safe-area-inset-top)) env(safe-area-inset-right) 0 env(safe-area-inset-left)">
         <TransitionChild as="template"
           enter="transition ease-in-out duration-300 transform"
           enter-from="translate-y-full"
@@ -61,7 +61,7 @@ const setIsOpen = (value: boolean) => {
           leave="transition ease-in-out duration-300 transform"
           leave-from="translate-y-0"
           leave-to="translate-y-full">
-          <DialogPanel class="w-full h-full max-w-3xl mx-auto rounded-t-[10px] px-4 modal-bg">
+          <DialogPanel class="w-full h-full max-w-3xl mx-auto rounded-t-[10px] px-4 modal-bg overflow-y-auto">
             <div class="modal-header-wrapper w-full h-[54px] text-center items-center flex">
               <div class="w-1/4 text-left">
                 <button type="button"

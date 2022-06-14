@@ -86,8 +86,7 @@ async function addMoodRecord() {
           for="modal-date-picker">{{ $t('Date') }}</label>
         <input v-model="modal.date"
           type="date"
-          class="px-[12px] py-[6px] rounded-lg body-text"
-          style="background-color: var(--system-gray-5);"
+          class="px-[12px] py-[6px] rounded-lg body-text input-datepicker"
           id="modal-date-picker"
           required>
       </div>

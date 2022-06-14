@@ -37,7 +37,7 @@ export default defineConfig({
           {
             name: 'Summary',
             short_name: 'Summary',
-            url: '/summary',
+            url: '/',
             icons: [
               {
                 src: 'img/icons/heart-96-filled.png',

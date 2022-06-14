@@ -177,7 +177,7 @@ async function deleteRecord(id: number) {
           </h2>
           <button class="ml-auto primary"
             type="button"
-            @click="openEditModal()">{{ $t('Edit') }}</button>
+            @click="openEditModal()">{{ $t('Actions.Edit') }}</button>
         </div>
         <pre v-if="selectedDayRecord?.notes"
           class="body-text">
@@ -196,7 +196,7 @@ async function deleteRecord(id: number) {
         type="button"
         class="danger button-bg my-4 w-full py-2 px-4-safe text-left body-text min-h-[44px]"
         @click="deleteRecord(selectedDayRecord!.id as number)">
-        {{ $t('Delete') }}
+        {{ $t('Actions.Delete') }}
       </button>
     </div>
 

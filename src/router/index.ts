@@ -8,7 +8,6 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
-      //meta: { transition: 'fade' },
     },
     {
       path: '/calendar',
@@ -24,26 +23,31 @@ const router = createRouter({
       path: '/settings/theme',
       name: 'theme',
       component: () => import('../views/SettingsTheme.vue'),
+      meta: { transition: 'slide-left' },
     },
     {
       path: '/settings/language',
       name: 'language',
       component: () => import('../views/SettingsLanguage.vue'),
+      meta: { transition: 'slide-left' },
     },
     {
       path: '/settings/privacy-policy',
       name: 'privacy-policy',
       component: () => import('../views/SettingsPrivacyPolicy.vue'),
+      meta: { transition: 'slide-left' },
     },
     {
       path: '/settings/manage-data',
       name: 'manage-data',
       component: () => import('../views/SettingsManageData.vue'),
+      meta: { transition: 'slide-left' },
     },
     {
       path: '/stats/:type',
       name: 'stats',
       component: () => import('../views/StatsView.vue'),
+      meta: { transition: 'slide-left' },
     },
   ],
 });

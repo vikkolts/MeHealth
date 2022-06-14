@@ -39,7 +39,6 @@ const setIsOpen = (value: boolean) => {
     :show="isOpen"
     as="template">
     <Dialog as="div"
-      :open="isOpen"
       class="relative z-[1000]"
       @close="setIsOpen">
       <TransitionChild as="template"
@@ -53,7 +52,8 @@ const setIsOpen = (value: boolean) => {
       </TransitionChild>
 
       <!-- Full-screen container to center the panel -->
-      <div class="fixed inset-0 flex items-center justify-center pt-8">
+      <div class="fixed inset-0 flex items-center justify-center"
+        style="padding-top: calc(2rem + env(safe-area-inset-top))">
         <TransitionChild as="template"
           enter="transition ease-in-out duration-300 transform"
           enter-from="translate-y-full"
@@ -75,7 +75,7 @@ const setIsOpen = (value: boolean) => {
                 <button type="submit"
                   class="primary font-semibold"
                   :disabled="!props.formValid"
-                  @click="emit('submitClicked')">{{ props.isEdit ? $t('Edit') : $t('Actions.Add') }}</button>
+                  @click="emit('submitClicked')">{{ props.isEdit ? $t('Actions.Edit') : $t('Actions.Add') }}</button>
               </div>
             </div>
 

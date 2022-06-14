@@ -7,7 +7,10 @@
   "Actions": {
     "Close": "Close",
     "Cancel": "Cancel",
-    "Add": "Add"
+    "Add": "Add",
+    "Update": "Update",
+    "Delete": "Delete",
+    "Edit": "Edit"
   },
   "DailyReminder": "Daily reminder",
   "AddTodaysMood": "Add today’s mood",
@@ -59,8 +62,6 @@
   "PrevMonth": "Previous month",
   "NoNotes": "No notes",
   "NoData": "No data",
-  "Delete": "Delete",
-  "Edit": "Edit",
   "Record": "Record",
   "MoodOfDay": "Mood of the day",
   "Theme": "Theme",
@@ -79,5 +80,7 @@
   "ConfirmClearDB": "Confirm to clear database",
   "SuccessfullyImportedRecords": "Successfully imported records",
   "PrivacyPolicyDescription": "MeHealth doesn't store, collect or share any personal information. Mood records are stored locally on device.",
-  "Version": "Version"
+  "Version": "Version",
+  "NewVersionIsAvailable": "App update is available",
+  "OfflineReady": "App is ready to work offline. Add to your home screen for full app-like experience."
 }

@@ -31,16 +31,34 @@ onMounted(async () => {
   <TheHeader />
   <router-view v-slot="{ Component, route }">
     <!-- Use any custom transition and fallback to `fade` -->
-    <!-- <transition :name="route.meta.transition as string || 'fade'">
+    <transition :name="route.meta.transition as string || undefined"
+      mode="out-in">
       <component :is="Component"
         :key="route.path" />
-    </transition> -->
-    <component :is="Component"
-      :key="route.path" />
+    </transition>
+    <!-- <component :is="Component"
+      :key="route.path" /> -->
   </router-view>
   <ReloadPrompt />
 </template>
 
 <style>
 @import '@/assets/base.css';
+
+.slide-left-enter-active {
+  transition: all 0.1s ease-out;
+}
+
+.slide-left-leave-active {
+  transition: all 0.1s ease-in-out;
+}
+
+.slide-left-enter-from {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
+.slide-left-leave-to {
+  transform: translateX(-20px);
+}
 </style>

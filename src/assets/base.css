@@ -20,7 +20,11 @@
   --c-radio-checked-bg: white;
   --c-chart-bg: white;
   --c-radio-apple-bg: hsla(240 3% 49% / 16%);
-  --c-button-bg: #EFEFF4;
+  --c-button-bg: #efeff4;
+  --c-input-datepicker: #eeeeef;
+  --c-action-sheet-bg: rgba(245, 245, 245, 0.7);
+  --c-border-action-gr: rgba(60, 60, 67, 0.36);
+  --c-border: #c6c5ca;
 
   /* DARK THEME COLORS */
   --c-red-d: #ff453a;
@@ -44,7 +48,11 @@
   --c-radio-checked-bg-d: #636366;
   --c-chart-bg-d: #000;
   --c-radio-apple-bg-d: hsla(240 3% 49% / 32%);
-  --c-button-bg-d: #2C2C2E;
+  --c-button-bg-d: #2c2c2e;
+  --c-input-datepicker-d: #3e3d42;
+  --c-action-sheet-bg-d: rgba(24, 24, 24, 0.7);
+  --c-border-action-gr-d: rgba(84, 84, 88, 0.65);
+  --c-border-d: #3e3c41;
 }
 
 :root {
@@ -69,10 +77,13 @@
   --placeholder-color: var(--c-placeholder);
   --radio-checked-bg: var(--c-radio-checked-bg);
   --chart-bg: var(--c-chart-bg);
-  --border-color: var(--c-gray-3);
+  --border-color: var(--c-border);
   --selected-calendar-bg: black;
   --radio-apple-bg: var(--c-radio-apple-bg);
   --button-bg: var(--c-button-bg);
+  --input-datepicker: var(--c-input-datepicker);
+  --action-sheet-bg: var(--c-action-sheet-bg);
+  --action-sheet-border-color: var(--c-border-action-gr);
 }
 
 /* DARK THEME */
@@ -100,10 +111,13 @@
     --placeholder-color: var(--c-placeholder-d);
     --radio-checked-bg: var(--c-radio-checked-bg-d);
     --chart-bg: var(--c-chart-bg-d);
-    --border-color: var(--c-gray-3-d);
+    --border-color: var(--c-border-d);
     --selected-calendar-bg: white;
     --radio-apple-bg: var(--c-radio-apple-bg-d);
     --button-bg: var(--c-button-bg-d);
+    --input-datepicker: var(--c-input-datepicker-d);
+    --action-sheet-bg: var(--c-action-sheet-bg-d);
+    --action-sheet-border-color: var(--c-border-action-gr-d);
   }
 }
 
@@ -133,10 +147,13 @@ html[data-color-scheme='dark'] {
   --placeholder-color: var(--c-placeholder-d);
   --radio-checked-bg: var(--c-radio-checked-bg-d);
   --chart-bg: var(--c-chart-bg-d);
-  --border-color: var(--c-gray-3-d);
+  --border-color: var(--c-border-d);
   --selected-calendar-bg: white;
   --radio-apple-bg: var(--c-radio-apple-bg-d);
   --button-bg: var(--c-button-bg-d);
+  --input-datepicker: var(--c-input-datepicker-d);
+  --action-sheet-bg: var(--c-action-sheet-bg-d);
+  --action-sheet-border-color: var(--c-border-action-gr-d);
 }
 
 ::placeholder {
@@ -171,6 +188,10 @@ html[data-color-scheme='dark'] {
 
 .system-indigo-color {
   color: var(--system-indigo);
+}
+
+.system-blue-bg {
+  background-color: var(--system-blue);
 }
 
 .system-red-bg {
@@ -436,6 +457,19 @@ input.apple-switch:checked:after {
   background-color: var(--card-color-background);
 }
 
-.button-bg{
+.button-bg {
   background-color: var(--button-bg);
+}
+
+.input-datepicker {
+  background-color: var(--input-datepicker);
+}
+
+.action-sheet {
+  backdrop-filter: blur(22px);
+  background-color: var(--action-sheet-bg);
+}
+
+.action-sheet > *:not(:last-child) {
+  border-bottom: 0.5px solid var(--action-sheet-border-color);
 }

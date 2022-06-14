@@ -1,15 +1,21 @@
 <script setup lang="ts">
+import { addDays, endOfDay, setHours, setMinutes, setSeconds } from "date-fns";
 import { ref } from "vue";
 import IconAlertBg48 from "./icons/IconAlertBg48.vue";
 import IconDismissCircleBg20 from "./icons/IconDismissCircleBg20.vue";
+import { useCookies } from "vue3-cookies";
 
 const emit = defineEmits<{
   (e: 'messageClick', event: Event): void
 }>()
 
+const { cookies } = useCookies();
 const show = ref(true)
 function closeSelf() {
-  show.value = false
+  const today = new Date();
+  const repeatYesterday = setSeconds(setMinutes(setHours(addDays(today, 1), 19), 0), 0);
+  show.value = false;
+  cookies.set('repeat-alert-after', repeatYesterday.toISOString(), repeatYesterday);
 }
 
 </script>

@@ -6,9 +6,11 @@ import { onMounted, ref } from "vue";
 import StatsCard from "@/components/StatsCard.vue";
 import AddMoodModal from "../components/AddMoodModal.vue";
 import { useMoodTypesStore } from "@/stores/moodTypes";
+import { useCookies } from "vue3-cookies";
 
 const title = ref('Pages.Summary');
 const isOpenAddModal = ref(false);
+const { cookies } = useCookies();
 
 const store = useMoodTypesStore()
 onMounted(async () => {
@@ -42,7 +44,8 @@ checkTimePeriod();
       :with-add-button="true"
       @button-click="isOpenAddModal = true" />
     <div class="flex flex-col w-full gap-[6px]">
-      <ClosableCard @click="isOpenAddModal = true"
+      <ClosableCard v-if="!cookies.get('repeat-alert-after')"
+        @click="isOpenAddModal = true"
         class="mb-2" />
       <StatsCard :title="$t('WeekStats')"
         :percent="store.moodPeriodsPercent?.week"

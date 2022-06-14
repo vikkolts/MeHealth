@@ -28,6 +28,14 @@ export const useAppSettingsStore = defineStore({
           'content',
           theme === 'Dark' || (theme === 'System' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? '#000000' : '#f2f1f6'
         );
+      document
+        .querySelector('meta[name="apple-mobile-web-app-status-bar-style"]')
+        ?.setAttribute(
+          'content',
+          theme === 'Dark' || (theme === 'System' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
+            ? 'black-translucent'
+            : 'default'
+        );
     },
     setNotificationsSettings() {
       this.isNotifications = !this.isNotifications;

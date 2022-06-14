@@ -16,6 +16,7 @@ const store = useAppSettingsStore();
 // restore theme
 document.documentElement.setAttribute('data-color-scheme', store.appTheme === 'Dark' ? 'dark' : store.appTheme === 'Light' ? 'light' : 'system');
 document.querySelector('meta[name="theme-color"]')?.setAttribute('content', store.appTheme === 'Dark' || store.appTheme === 'System' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? '#000000' : '#f2f1f6');
+document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]')?.setAttribute('content', store.appTheme === 'Dark' || store.appTheme === 'System' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'black-translucent' : 'default');
 // restore user selected lang
 const lsLang = localStorage.getItem('mehealth-lang');
 onMounted(async () => {

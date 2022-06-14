@@ -58,12 +58,12 @@ function confirmClearDB() {
       class="px-4-safe" />
 
     <button type="button"
-      class="primary item-white-bg min-h-[44px] w-full py-2 px-4-safe text-left body-text"
+      class="primary button-bg min-h-[44px] w-full py-2 px-4-safe text-left body-text"
       @click="exportData">
       {{ $t('ExportData') }}
     </button>
     <button type="button"
-      class="primary item-white-bg min-h-[44px] my-4 w-full py-2 px-4-safe text-left body-text"
+      class="primary button-bg min-h-[44px] my-4 w-full py-2 px-4-safe text-left body-text"
       @click="(importFileInput as HTMLInputElement).click()">
       {{ $t('ImportData') }}
     </button>
@@ -74,7 +74,7 @@ function confirmClearDB() {
       accept="application/json"
       @change="importData" />
     <button type="button"
-      class="danger item-white-bg min-h-[44px] w-full py-2 px-4-safe text-left body-text"
+      class="danger button-bg min-h-[44px] w-full py-2 px-4-safe text-left body-text"
       @click="confirmClearDB">
       {{ $t('ClearDB') }}
     </button>

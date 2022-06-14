@@ -33,6 +33,30 @@ export default defineConfig({
             purpose: 'maskable any',
           },
         ],
+        shortcuts: [
+          {
+            name: 'Summary',
+            short_name: 'Summary',
+            url: '/summary',
+            icons: [
+              {
+                src: 'img/icons/heart-96-filled.png',
+                sizes: '96x96',
+              },
+            ],
+          },
+          {
+            name: 'Calendar',
+            short_name: 'Calendar',
+            url: '/calendar',
+            icons: [
+              {
+                src: 'img/icons/calendar-96-filled.png',
+                sizes: '96x96',
+              },
+            ],
+          },
+        ],
       },
     }),
     vueI18n({

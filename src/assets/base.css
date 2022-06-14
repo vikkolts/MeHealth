@@ -20,6 +20,7 @@
   --c-radio-checked-bg: white;
   --c-chart-bg: white;
   --c-radio-apple-bg: hsla(240 3% 49% / 16%);
+  --c-button-bg: #EFEFF4;
 
   /* DARK THEME COLORS */
   --c-red-d: #ff453a;
@@ -43,6 +44,7 @@
   --c-radio-checked-bg-d: #636366;
   --c-chart-bg-d: #000;
   --c-radio-apple-bg-d: hsla(240 3% 49% / 32%);
+  --c-button-bg-d: #2C2C2E;
 }
 
 :root {
@@ -70,6 +72,7 @@
   --border-color: var(--c-gray-3);
   --selected-calendar-bg: black;
   --radio-apple-bg: var(--c-radio-apple-bg);
+  --button-bg: var(--c-button-bg);
 }
 
 /* DARK THEME */
@@ -100,6 +103,7 @@
     --border-color: var(--c-gray-3-d);
     --selected-calendar-bg: white;
     --radio-apple-bg: var(--c-radio-apple-bg-d);
+    --button-bg: var(--c-button-bg-d);
   }
 }
 
@@ -132,6 +136,7 @@ html[data-color-scheme='dark'] {
   --border-color: var(--c-gray-3-d);
   --selected-calendar-bg: white;
   --radio-apple-bg: var(--c-radio-apple-bg-d);
+  --button-bg: var(--c-button-bg-d);
 }
 
 ::placeholder {
@@ -306,6 +311,10 @@ main {
   padding-left: calc(16px + env(safe-area-inset-left));
   padding-right: calc(16px + env(safe-area-inset-right));
 }
+.mx-4-safe {
+  margin-left: calc(16px + env(safe-area-inset-left));
+  margin-right: calc(16px + env(safe-area-inset-right));
+}
 
 .system-white-bg {
   background-color: var(--card-color-background);
@@ -425,4 +434,8 @@ input.apple-switch:checked:after {
 
 .list-item-bg {
   background-color: var(--card-color-background);
+}
+
+.button-bg{
+  background-color: var(--button-bg);
 }

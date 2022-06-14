@@ -5,11 +5,11 @@ import { useI18n } from 'vue-i18n';
 import ListItem from "@/components/ListItem.vue";
 import IconDarkThemeBg24 from "../components/icons/IconDarkThemeBg24.vue";
 import IconChevronRight16 from "../components/icons/IconChevronRight16.vue";
-import TheSwitch from "../components/TheSwitch.vue";
+//import TheSwitch from "../components/TheSwitch.vue";
 import IconGlobeBg24 from "../components/icons/IconGlobeBg24.vue";
 import IconHandBg28 from "../components/icons/IconHandBg28.vue";
 import IconDatabaseBg24 from "../components/icons/IconDatabaseBg24.vue";
-import IconAlertBg24 from "../components/icons/IconAlertBg24.vue";
+//import IconAlertBg24 from "../components/icons/IconAlertBg24.vue";
 import IconInfoBg24 from '../components/icons/IconInfoBg24.vue';
 
 const { locale } = useI18n()
@@ -32,7 +32,7 @@ const appStore = useAppSettingsStore();
         </template>
       </ListItem>
 
-      <ListItem class="cursor-default">
+      <!-- <ListItem class="cursor-default">
         <template #icon>
           <IconAlertBg24 />
         </template>
@@ -41,7 +41,7 @@ const appStore = useAppSettingsStore();
           <TheSwitch :checked="appStore.isNotifications"
             @change="appStore.setNotificationsSettings()" />
         </template>
-      </ListItem>
+      </ListItem> -->
 
       <ListItem @click="$router.push('/settings/manage-data')">
         <template #icon>

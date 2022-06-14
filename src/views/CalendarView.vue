@@ -13,7 +13,6 @@ import {
   getDay,
   isEqual,
   isSameDay,
-  isSameMonth,
   isToday,
   parse,
   parseISO,
@@ -156,7 +155,7 @@ async function confirmDeleteRecord(id: number) {
                   'selected-calendar-day': isEqual(day, selectedDay) &&
                     !isToday(day)
                 },
-                { 'hover:bg-gray-200': !isEqual(day, selectedDay) },
+                { 'hover:bg-gray-200 hover:text-black': !isEqual(day, selectedDay) },
                 { 'font-semibold': (isEqual(day, selectedDay) || isToday(day)) },
                 'mx-auto flex h-8 w-8 items-center justify-center rounded-full body-text'
               ]">
@@ -173,7 +172,7 @@ async function confirmDeleteRecord(id: number) {
         </div>
       </div>
       <section class="p-4 chart-bg flex flex-col"
-        style="min-height: calc(100vh - 464px - env(safe-area-inset-top));">
+        style="min-height: calc(100vh - 460px - env(safe-area-inset-top));">
         <div v-if="selectedDayRecord"
           class="flex items-center pb-4">
           <h2 class="font-semibold body-text">

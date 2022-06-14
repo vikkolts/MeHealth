@@ -44,7 +44,7 @@ checkTimePeriod();
       :with-add-button="true"
       @button-click="isOpenAddModal = true" />
     <div class="flex flex-col w-full gap-[6px]">
-      <ClosableCard v-if="!cookies.get('repeat-alert-after')"
+      <ClosableCard v-if="!cookies.isKey('repeat-alert-after')"
         @click="isOpenAddModal = true"
         class="mb-2" />
       <StatsCard :title="$t('WeekStats')"

@@ -76,7 +76,7 @@ const close = async () => {
           leave-to="translate-y-full">
           <DialogPanel v-if="needRefresh"
             class="w-full h-auto max-w-md mx-auto mt-auto rounded-t-[10px] px-4-safe pb-4-safe">
-            <div class="rounded-xl action-sheet">
+            <div class="rounded-xl action-sheet mb-2">
               <DialogTitle class="footnote w-full px-4 py-3 text-center items-center">
                 {{ $t('NewVersionIsAvailable') }}
               </DialogTitle>

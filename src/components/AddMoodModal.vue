@@ -4,6 +4,7 @@ import { computed, onMounted, reactive, watch } from "vue";
 import { RadioGroup, RadioGroupOption, RadioGroupLabel } from "@headlessui/vue";
 import { useMoodTypesStore, type DBMoodRecord } from "@/stores/moodTypes";
 import { storeToRefs } from 'pinia';
+import { formatISO } from "date-fns";
 
 const props = defineProps<{
   modelValue: boolean,
@@ -29,7 +30,7 @@ const { moodTypes } = storeToRefs(store)
 const modal = reactive({
   id: null as any,
   mood: '' as '' | number,
-  date: '',
+  date: formatISO(new Date(), { representation: 'date' }),
   notes: '',
 });
 
@@ -39,7 +40,7 @@ onMounted(() => store.getMoodsList())
 
 function clearModalData() {
   modal.id = null;
-  modal.date = '';
+  modal.date = formatISO(new Date(), { representation: 'date' });
   modal.mood = '';
   modal.notes = '';
 }
@@ -65,9 +66,8 @@ async function addMoodRecord() {
   if (modal.id) Object.assign(formData, { id: +modal.id });
   try {
     await store.saveMoodRecord(formData);
-  } catch (e) {
-    console.log(e)
-    console.log(formData)
+  } catch (e: any) {
+    alert(e?.message || 'Error occurred')
   }
   isOpenAddModal.value = false;
   emit("recordCreated");

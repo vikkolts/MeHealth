@@ -82,5 +82,6 @@
   "PrivacyPolicyDescription": "MeHealth doesn't store, collect or share any personal information. Mood records are stored locally on device.",
   "Version": "Version",
   "NewVersionIsAvailable": "App update is available",
-  "OfflineReady": "App is ready to work offline. Add to your home screen for full app-like experience."
+  "OfflineReady": "App is ready to work offline. Add to your home screen for full app-like experience.",
+  "ConfirmDeleteRecord": "Confirm delete record"
 }

@@ -75,7 +75,7 @@ const close = async () => {
           leave-from="translate-y-0"
           leave-to="translate-y-full">
           <DialogPanel v-if="needRefresh"
-            class="w-full h-auto max-w-3xl mx-auto mt-auto rounded-t-[10px] px-4-safe">
+            class="w-full h-auto max-w-md mx-auto mt-auto rounded-t-[10px] px-4-safe pb-4-safe">
             <div class="rounded-xl action-sheet">
               <DialogTitle class="footnote w-full px-4 py-3 text-center items-center">
                 {{ $t('NewVersionIsAvailable') }}
@@ -95,7 +95,7 @@ const close = async () => {
           </DialogPanel>
 
           <DialogPanel v-else-if="offlineReady"
-            class="w-full h-auto max-w-3xl mx-auto mt-auto rounded-t-[10px] px-4-safe">
+            class="w-full h-auto max-w-md mx-auto mt-auto rounded-t-[10px] px-4-safe pb-4-safe">
             <div class="rounded-xl action-sheet">
               <DialogTitle class="footnote w-full px-4 py-3 text-center items-center">
                 {{ $t('OfflineReady') }}

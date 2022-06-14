@@ -23,7 +23,9 @@ import {
 import IconChevronLeft24 from '../components/icons/IconChevronLeft24.vue'
 import IconChevronRight24 from '../components/icons/IconChevronRight24.vue'
 import { computed } from "@vue/reactivity";
+import { useI18n } from "vue-i18n";
 
+const { t } = useI18n()
 const store = useMoodTypesStore()
 const { moodRecords } = storeToRefs(store)
 const isOpenAddModal = ref(false);
@@ -80,6 +82,11 @@ function openEditModal() {
 async function deleteRecord(id: number) {
   await store.deleteMoodRecord(id);
   await store.getMoodRecordsList();
+}
+
+async function confirmDeleteRecord(id: number) {
+  let response = confirm(t('ConfirmDeleteRecord'));
+  if (response) await deleteRecord(id);
 }
 </script>
 
@@ -166,7 +173,7 @@ async function deleteRecord(id: number) {
         </div>
       </div>
       <section class="p-4 chart-bg flex flex-col"
-        style="min-height: calc(100vh - 464px);">
+        style="min-height: calc(100vh - 464px - env(safe-area-inset-top));">
         <div v-if="selectedDayRecord"
           class="flex items-center pb-4">
           <h2 class="font-semibold body-text">
@@ -195,7 +202,7 @@ async function deleteRecord(id: number) {
       <button v-if="selectedDayRecord"
         type="button"
         class="danger button-bg my-4 w-full py-2 px-4-safe text-left body-text min-h-[44px]"
-        @click="deleteRecord(selectedDayRecord!.id as number)">
+        @click="confirmDeleteRecord(selectedDayRecord!.id as number)">
         {{ $t('Actions.Delete') }}
       </button>
     </div>

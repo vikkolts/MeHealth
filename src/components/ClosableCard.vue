@@ -9,9 +9,13 @@ const emit = defineEmits<{
   (e: 'messageClick', event: Event): void
 }>()
 
+defineExpose({
+  closeAlert
+})
+
 const { cookies } = useCookies();
 const show = ref(true)
-function closeSelf() {
+function closeAlert() {
   const today = new Date();
   const repeatYesterday = setSeconds(setMinutes(setHours(addDays(today, 1), 19), 0), 0);
   show.value = false;
@@ -32,7 +36,7 @@ function closeSelf() {
     <button type="button"
       class="flex my-auto"
       :title="$t('Actions.Close')"
-      @click.stop="closeSelf">
+      @click.stop="closeAlert">
       <IconDismissCircleBg20 class="system-gray-color" />
     </button>
   </div>

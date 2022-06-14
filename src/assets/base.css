@@ -332,6 +332,11 @@ main {
   padding-left: calc(16px + env(safe-area-inset-left));
   padding-right: calc(16px + env(safe-area-inset-right));
 }
+
+.pb-4-safe {
+  padding-bottom: calc(16px + env(safe-area-inset-bottom));
+}
+
 .mx-4-safe {
   margin-left: calc(16px + env(safe-area-inset-left));
   margin-right: calc(16px + env(safe-area-inset-right));

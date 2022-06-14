@@ -2,7 +2,7 @@
 import PageHeader from "../components/PageHeader.vue"
 import ClosableCard from "../components/ClosableCard.vue"
 import { formatISO } from 'date-fns'
-import { onMounted, ref } from "vue";
+import { onMounted, ref, type Ref } from "vue";
 import StatsCard from "@/components/StatsCard.vue";
 import AddMoodModal from "../components/AddMoodModal.vue";
 import { useMoodTypesStore } from "@/stores/moodTypes";
@@ -10,6 +10,7 @@ import { useCookies } from "vue3-cookies";
 
 const title = ref('Pages.Summary');
 const isOpenAddModal = ref(false);
+const alertRef: Ref = ref(null);
 const { cookies } = useCookies();
 
 const store = useMoodTypesStore()
@@ -36,6 +37,11 @@ function checkTimePeriod() {
 };
 checkTimePeriod();
 
+function afterRecordCreated() {
+  store.getMoodRecordsList();
+  if (!cookies.isKey('repeat-alert-after')) alertRef.value.closeAlert();
+}
+
 </script>
 
 <template>
@@ -45,6 +51,7 @@ checkTimePeriod();
       @button-click="isOpenAddModal = true" />
     <div class="flex flex-col w-full gap-[6px]">
       <ClosableCard v-if="!cookies.isKey('repeat-alert-after')"
+        ref="alertRef"
         @click="isOpenAddModal = true"
         class="mb-2" />
       <StatsCard :title="$t('WeekStats')"
@@ -58,6 +65,6 @@ checkTimePeriod();
         @click="$router.push({ name: 'stats', params: { type: 'year' } })" />
     </div>
     <AddMoodModal v-model="isOpenAddModal"
-      @record-created="store.getMoodRecordsList()" />
+      @record-created="afterRecordCreated()" />
   </main>
 </template>

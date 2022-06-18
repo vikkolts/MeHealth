@@ -20,7 +20,9 @@ document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]')?.se
 // restore user selected lang
 const lsLang = localStorage.getItem('mehealth-lang');
 onMounted(async () => {
-  const lang = lsLang || 'en'
+  const userBrowserLang = window.navigator.language.slice(0, 2);
+  const defaultLang = userBrowserLang === 'uk' ? 'uk' : 'en';
+  const lang = lsLang || defaultLang;
   if (!availableLocales.includes(lang)) {
     await loadLocaleMessages(lang);
   }

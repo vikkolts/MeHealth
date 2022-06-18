@@ -115,7 +115,7 @@ onMounted(async () => {
           </Tab>
         </TabList>
 
-        <label class="uppercase footnote system-gray-color font-semibold">{{ $t('InAverage') }}</label>
+        <label class="uppercase footnote system-gray-color font-semibold">{{ $t('InGeneral') }}</label>
         <h2 class="large-heading font-bold font-rounded">{{ $t(`Stats.${statsLabel}`) }}</h2>
         <label class="subheadline system-gray-color font-semibold">{{ computedDateRange }}</label>
 

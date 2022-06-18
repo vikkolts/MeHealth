@@ -7,8 +7,8 @@ import IconSettings28 from "./icons/IconSettings28.vue";
 
 function toggleAnimClass(e: Event) {
   const el = (e.target as HTMLAnchorElement);
-  setTimeout(() => { el.classList.add('router-ling-svg-anim') }, 50);
-  setTimeout(() => { el.classList.remove('router-ling-svg-anim') }, 551);
+  setTimeout(() => { el.classList.add('router-ling-svg-anim') }, 100);
+  setTimeout(() => { el.classList.remove('router-ling-svg-anim') }, 500);
 }
 </script>
 

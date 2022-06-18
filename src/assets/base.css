@@ -488,3 +488,28 @@ input.apple-switch:checked:after {
 .action-sheet > *:not(:last-child) {
   border-bottom: 0.5px solid var(--action-sheet-border-color);
 }
+
+nav > .router-link-exact-active > svg{
+  transform-origin: center center;
+}
+
+nav > .router-ling-svg-anim.router-link-exact-active > svg{
+  animation-name: svgLinkAnimation;
+  animation-duration: 0.35s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes svgLinkAnimation {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(0.75);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

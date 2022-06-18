@@ -135,7 +135,7 @@ async function confirmDeleteRecord(id: number) {
               { 'pr-4': getDay(day) === 0 },
               { 'pl-4': getDay(day) === 1 },
               { 'border-t-[0.5px]': getWeekOfMonth(day, { weekStartsOn: 1 }) !== 1 },
-              'pt-1 pb-1.5'
+              'pt-1 pb-2'
             ]">
             <button type="button"
               @click="() => selectedDay = day"

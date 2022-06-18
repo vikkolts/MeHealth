@@ -492,6 +492,8 @@ input.apple-switch:checked:after {
 
 nav > .router-link-exact-active > svg{
   transform-origin: center center;
+  display: flex;
+  width: 100%;
 }
 
 nav > .router-ling-svg-anim.router-link-exact-active > svg{

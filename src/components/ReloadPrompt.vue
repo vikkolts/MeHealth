@@ -7,9 +7,12 @@ import {
   TransitionRoot,
   TransitionChild,
 } from '@headlessui/vue'
+import { useEventListener } from '@vueuse/core'
 
 // replaced dynamically
 const reloadSW: any = '__RELOAD_SW__'
+
+let checkSWUpdate: Function;
 
 const {
   offlineReady,
@@ -19,6 +22,7 @@ const {
   immediate: true,
   onRegistered(r: any) {
     if (reloadSW === 'true') {
+      checkSWUpdate = r?.update();
       r && setInterval(async () => {
         // eslint-disable-next-line no-console
         console.log('Checking for sw update')
@@ -30,7 +34,9 @@ const {
       console.log(`SW Registered: ${r}`)
     }
   },
-})
+});
+
+useEventListener(document, 'visibilitychange', handleVisibilityChange);
 
 const close = async () => {
   offlineReady.value = false
@@ -44,6 +50,12 @@ const close = async () => {
 //   let isApple = ['iPhone', 'iPad', 'iPod'].includes(navigator.platform);
 //   return isApple;
 // }
+
+function handleVisibilityChange(e: Event) {
+  if ((document as Document)['hidden']) return;
+  console.log(checkSWUpdate);
+  if (reloadSW === 'true' && checkSWUpdate) checkSWUpdate();
+}
 
 </script>
 
@@ -95,6 +107,7 @@ const close = async () => {
           </DialogPanel>
 
           <DialogPanel v-else-if="offlineReady"
+            id="offline-ready-dialog"
             class="w-full h-auto max-w-md mx-auto mt-auto rounded-t-[10px] px-4-safe pb-4-safe">
             <div class="rounded-xl action-sheet">
               <DialogTitle class="footnote w-full px-4 py-3 text-center items-center">

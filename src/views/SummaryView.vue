@@ -7,6 +7,7 @@ import StatsCard from "@/components/StatsCard.vue";
 import AddMoodModal from "../components/AddMoodModal.vue";
 import { useMoodTypesStore } from "@/stores/moodTypes";
 import { useCookies } from "vue3-cookies";
+import { useEventListener } from '@vueuse/core'
 
 const title = ref('Pages.Summary');
 const isOpenAddModal = ref(false);
@@ -15,14 +16,11 @@ const { cookies } = useCookies();
 const isShowAlert = ref(!cookies.isKey('repeat-alert-after'));
 const store = useMoodTypesStore()
 
+useEventListener(document, 'visibilitychange', handleVisibilityChange)
+
 onMounted(async () => {
   await store.getMoodRecordsList();
   checkForAddAlert();
-  document.addEventListener('visibilitychange', handleVisibilityChange);
-})
-
-onUnmounted(() => {
-  document.removeEventListener('visibilitychange', handleVisibilityChange)
 })
 
 function checkTimePeriod() {

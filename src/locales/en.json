@@ -27,7 +27,12 @@
     "Average": "Average",
     "BelowAverage": "Below average",
     "Bad": "Bad",
-    "Terrible": "Terrible"
+    "Terrible": "Terrible",
+    "Tendency": {
+      "Unchanged": "Unchanged",
+      "GettingWorse": "Getting worse",
+      "GettingBetter": "Getting better"
+    }
   },
   "Week": "Week",
   "Month": "Month",

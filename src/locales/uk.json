@@ -27,7 +27,12 @@
     "Average": "Середньо",
     "BelowAverage": "Нижче середнього",
     "Bad": "Погано",
-    "Terrible": "Жахливо"
+    "Terrible": "Жахливо",
+    "Tendency": {
+      "Unchanged": "Без значних змін",
+      "GettingWorse": "Погіршується",
+      "GettingBetter": "Покращується"
+    }
   },
   "Week": "Тиждень",
   "Month": "Місяць",

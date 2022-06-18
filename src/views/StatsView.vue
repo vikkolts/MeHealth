@@ -52,20 +52,31 @@ const statsLabel = computed(() => {
   return store.statsAverageLabels[Math.round(typePercent * store.statsAverageLabels.length / 100)];
 })
 
-// const tendency = computed(() => {
-//   if (!store.moodRecordListByPeriods[statsTypes[selectedTab.value].id]) return;
-//   const diffArray: number[] = [];
-//   const moodIds = store.moodTypes.map(e => e.id)
-//   const moodsCount = Math.max(...moodIds) - Math.min(...moodIds);
-//   store.moodRecordListByPeriods[statsTypes[selectedTab.value].id].forEach((currEl, index) => {
-//     const nextEl = store.moodRecordListByPeriods[statsTypes[selectedTab.value].id][+index + 1];
-//     if (nextEl) {
-//       diffArray.push(nextEl.mood_id / moodsCount + currEl.mood_id / moodsCount);
-//     }
-//   })
+const tendency = computed(() => {
+  if (!store.moodRecordListByPeriods[statsTypes[selectedTab.value].id]) return;
+  const diffArray: number[] = [];
+  const moodIds = store.moodTypes.map(e => e.id)
+  const maxMoodId = Math.max(...moodIds);
+  store.moodRecordListByPeriods[statsTypes[selectedTab.value].id].forEach((currEl, index) => {
+    const nextEl = store.moodRecordListByPeriods[statsTypes[selectedTab.value].id][index + 1];
+    if (nextEl) {
+      const currentElPercent = currEl.mood_id * 100 / maxMoodId;
+      const nextElPercent = nextEl.mood_id * 100 / maxMoodId;
+      diffArray.push(nextElPercent - currentElPercent);
+    }
+  })
+  return (diffArray.reduce((a, b) => a + b, 0) / diffArray.length) || 0;
+})
 
-//   return (diffArray.reduce((a, b) => a + b, 0) / diffArray.length) || 0;
-// })
+const computedTendency = computed(() => {
+  if (tendency.value === undefined) return '';
+  if (tendency.value > 3)
+    return t('Stats.Tendency.GettingBetter');
+  else if (tendency.value < -3)
+    return t('Stats.Tendency.GettingWorse')
+  else
+    return t('Stats.Tendency.Unchanged')
+})
 
 onMounted(async () => {
   await store.getMoodRecordsList();
@@ -116,11 +127,11 @@ onMounted(async () => {
           </TabPanel>
         </TabPanels>
       </TabGroup>
-      <!-- <div class="border rounded-[10px] px-4-safe py-[14px] mb-4 flex items-center justify-between"
+      <div class="border rounded-[10px] px-4-safe py-[14px] mb-4 flex items-center justify-between"
         style="border-color: var(--system-gray-5)">
         <label class="subheadline">{{ $t('Tendency') }}</label>
-        <label>{{ tendency?.toFixed(2) }}</label>
-      </div> -->
+        <label>{{ computedTendency }}</label>
+      </div>
     </section>
   </main>
 </template>

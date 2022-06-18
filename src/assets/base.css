@@ -336,6 +336,7 @@ main {
   max-width: 768px;
   margin: 0 auto;
   padding-bottom: calc(49px + env(safe-area-inset-bottom));
+  scroll-snap-type: y mandatory;
 }
 
 .px-4-safe {

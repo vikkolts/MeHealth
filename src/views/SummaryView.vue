@@ -2,7 +2,7 @@
 import PageHeader from "../components/PageHeader.vue"
 import ClosableCard from "../components/ClosableCard.vue"
 import { formatISO } from 'date-fns'
-import { onMounted, ref, type Ref } from "vue";
+import { onMounted, onUnmounted, ref, type Ref } from "vue";
 import StatsCard from "@/components/StatsCard.vue";
 import AddMoodModal from "../components/AddMoodModal.vue";
 import { useMoodTypesStore } from "@/stores/moodTypes";
@@ -12,10 +12,17 @@ const title = ref('Pages.Summary');
 const isOpenAddModal = ref(false);
 const alertRef: Ref = ref(null);
 const { cookies } = useCookies();
-
+const isShowAlert = ref(!cookies.isKey('repeat-alert-after'));
 const store = useMoodTypesStore()
+
 onMounted(async () => {
   await store.getMoodRecordsList();
+  checkForAddAlert();
+  document.addEventListener('visibilitychange', handleVisibilityChange);
+})
+
+onUnmounted(() => {
+  document.removeEventListener('visibilitychange', handleVisibilityChange)
 })
 
 function checkTimePeriod() {
@@ -42,6 +49,17 @@ function afterRecordCreated() {
   if (!cookies.isKey('repeat-alert-after')) alertRef.value.closeAlert();
 }
 
+function checkForAddAlert() {
+  isShowAlert.value = (!cookies.isKey('repeat-alert-after') || !store.moodRecords.find(r => r.date === (new Date()).toISOString().slice(0, 10)));
+}
+
+function handleVisibilityChange(e: Event) {
+  if (!(document as Document)['hidden']) {
+    checkForAddAlert();
+    checkTimePeriod();
+  }
+}
+
 </script>
 
 <template>
@@ -50,7 +68,7 @@ function afterRecordCreated() {
       :with-add-button="true"
       @button-click="isOpenAddModal = true" />
     <div class="flex flex-col w-full gap-[6px]">
-      <ClosableCard v-if="!cookies.isKey('repeat-alert-after')"
+      <ClosableCard v-if="isShowAlert"
         ref="alertRef"
         @click="isOpenAddModal = true"
         class="mb-2" />

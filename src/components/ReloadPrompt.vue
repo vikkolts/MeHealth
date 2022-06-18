@@ -8,7 +8,7 @@ import {
   TransitionChild,
 } from '@headlessui/vue'
 
-// replaced dyanmicaly
+// replaced dynamically
 const reloadSW: any = '__RELOAD_SW__'
 
 const {
@@ -23,7 +23,7 @@ const {
         // eslint-disable-next-line no-console
         console.log('Checking for sw update')
         await r.update()
-      }, 20000 /* 20s for testing purposes */)
+      }, 600000 /* 600s check for updates */)
     }
     else {
       // eslint-disable-next-line no-console

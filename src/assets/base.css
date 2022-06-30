@@ -361,7 +361,7 @@ main {
   width: 100%;
   height: 6px;
   border-radius: 10px;
-  background: linear-gradient(270deg, var(--meter-start) 0%, var(--meter-middle) 50.52%, var(--meter-end) 100%);
+  background: linear-gradient(90deg, var(--meter-start) 0%, var(--meter-middle) 50.52%, var(--meter-end) 100%);
 }
 
 .custom-meter div.thumb {
